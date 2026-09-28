@@ -25,63 +25,27 @@
             <ph-list :size="20"></ph-list>
           </button>
           <ul
-            class="
-              text-left
-              absolute
-              bg-slate-50
-              right-7
-              rounded
-              py-3
-              pl-3
-              pr-5
-              text-sm text-slate-600
-              space-y-1
-              md:space-y-0
-              md:bg-transparent
-              md:text-white
-              md:items-center
-              md:flex
-              md:static
-              md:space-x-7
-            "
+            class="text-left absolute bg-slate-50 right-7 rounded py-3 pl-3 pr-5 text-sm text-slate-600 space-y-1 md:space-y-0 md:bg-transparent md:text-white md:items-center md:flex md:static md:space-x-7"
             :class="[show ? '' : 'hidden']"
           >
             <li>
               <router-link
                 :to="{ name: 'Public Alumni Page' }"
-                class="
-                  flex
-                  items-center
-                  hover:text-slate-300
-                  transition-all
-                  duration-300
-                "
+                class="flex items-center hover:text-slate-300 transition-all duration-300"
                 >Alumni</router-link
               >
             </li>
             <li>
               <router-link
                 :to="{ name: 'Public Information Page' }"
-                class="
-                  flex
-                  items-center
-                  hover:text-slate-300
-                  transition-all
-                  duration-300
-                "
+                class="flex items-center hover:text-slate-300 transition-all duration-300"
                 >Informasi</router-link
               >
             </li>
             <li>
               <router-link
                 :to="{ name: 'Public Contact Page' }"
-                class="
-                  flex
-                  items-center
-                  hover:text-slate-300
-                  transition-all
-                  duration-300
-                "
+                class="flex items-center hover:text-slate-300 transition-all duration-300"
                 ><!-- <ph-phone class="mr-1" /> -->
                 Kontak</router-link
               >
@@ -89,21 +53,7 @@
             <li class="md:hidden"><hr class="bg-slate-800 my-2" /></li>
             <li v-if="!authStore.isAuth">
               <a
-                class="
-                  flex
-                  items-center
-                  hover:text-slate-300
-                  md:hover:text-slate-800 md:hover:bg-slate-300
-                  transition-all
-                  duration-300
-                  md:bg-slate-100
-                  md:text-slate-800
-                  md:py-2
-                  md:px-4
-                  md:opacity-7
-                  md:rounded-lg
-                  cursor-pointer
-                "
+                class="flex items-center hover:text-slate-300 md:hover:text-slate-800 md:hover:bg-slate-300 transition-all duration-300 md:bg-slate-100 md:text-slate-800 md:py-2 md:px-4 md:opacity-7 md:rounded-lg cursor-pointer"
                 @click.prevent="openDialogLogin"
                 ><ph-sign-in class="mr-1" /> Masuk</a
               >
@@ -111,21 +61,7 @@
             <li v-else-if="authStore.isAuth">
               <router-link
                 :to="{ name: 'Member Dashboard Page' }"
-                class="
-                  flex
-                  items-center
-                  hover:text-slate-300
-                  md:hover:text-slate-800 md:hover:bg-slate-300
-                  transition-all
-                  duration-300
-                  md:bg-slate-100
-                  md:text-slate-800
-                  md:py-2
-                  md:px-4
-                  md:opacity-7
-                  md:rounded-lg
-                  cursor-pointer
-                "
+                class="flex items-center hover:text-slate-300 md:hover:text-slate-800 md:hover:bg-slate-300 transition-all duration-300 md:bg-slate-100 md:text-slate-800 md:py-2 md:px-4 md:opacity-7 md:rounded-lg cursor-pointer"
                 ><ph-gauge class="mr-1" /> Dashboard</router-link
               >
             </li>
@@ -136,42 +72,24 @@
         <router-view></router-view>
       </main>
       <footer
-        class="
-          flex
-          items-center
-          justify-between
-          bg-slate-700
-          min-h-[30px]
-          py-2
-          px-8
-          rounded-lg
-          text-white
-        "
+        class="flex items-center justify-between bg-slate-700 min-h-[30px] py-2 px-8 rounded-lg text-white"
       >
-        <div class="text-xs text-slate-400">Arbi Syarifudin &copy; KP 2022</div>
+        <div class="text-xs text-slate-400">
+          Kelompok Laundry &copy; KP 2026
+        </div>
         <div>
           <ul class="flex items-center space-x-3">
             <li>
               <router-link
                 to="#"
-                class="
-                  text-slate-300
-                  hover:text-slate-50
-                  transition-all
-                  duration-300
-                "
+                class="text-slate-300 hover:text-slate-50 transition-all duration-300"
                 ><ph-facebook-logo weight="fill" :size="25"
               /></router-link>
             </li>
             <li>
               <router-link
                 to="#"
-                class="
-                  text-slate-300
-                  hover:text-slate-50
-                  transition-all
-                  duration-300
-                "
+                class="text-slate-300 hover:text-slate-50 transition-all duration-300"
                 ><ph-instagram-logo weight="fill" :size="25"
               /></router-link>
             </li>
@@ -230,24 +148,24 @@
 </template>
 
 <script setup>
-import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
+import { VueReCaptcha, useReCaptcha } from "vue-recaptcha-v3";
 
-import { ref } from '@vue/reactivity';
-import { computed, onMounted, watch } from '@vue/runtime-core';
-import { useRouter } from 'vue-router';
+import { ref } from "@vue/reactivity";
+import { computed, onMounted, watch } from "@vue/runtime-core";
+import { useRouter } from "vue-router";
 
-import Button from '@/components/UI/Button.vue';
-import Input from '@/components/UI/Input.vue';
-import Select from '@/components/UI/Select.vue';
-import Modal from '@/components/UI/Modal.vue';
+import Button from "@/components/UI/Button.vue";
+import Input from "@/components/UI/Input.vue";
+import Select from "@/components/UI/Select.vue";
+import Modal from "@/components/UI/Modal.vue";
 
-import AuthService from '@/services/auth.service';
+import AuthService from "@/services/auth.service";
 
-import useLoading from '@/composables/loading';
-import useAlert from '@/composables/alert';
+import useLoading from "@/composables/loading";
+import useAlert from "@/composables/alert";
 
-import { useMenuStore } from '@/store/menu';
-import { useAuthStore } from '@/store/auth';
+import { useMenuStore } from "@/store/menu";
+import { useAuthStore } from "@/store/auth";
 
 const show = ref(false);
 const loading = ref(false);
@@ -265,13 +183,13 @@ const toggleMenu = () => {
 
 /* LOGIN */
 const stateLogin = ref({
-  unameOrEmail: '',
-  password: '',
-  recaptchaToken: '',
+  unameOrEmail: "",
+  password: "",
+  recaptchaToken: "",
 });
 const errorsLogin = ref({
-  unameOrEmail: '',
-  password: '',
+  unameOrEmail: "",
+  password: "",
 });
 const isOpenDialogLogin = ref(false);
 
@@ -297,22 +215,22 @@ const onSubmitLogin = async () => {
     recaptchaToken: stateLogin.value.recaptchaToken,
   })
     .then(async (res) => {
-      if (res.type === 'Alumni') {
-        await $router.push({ name: 'Member Dashboard Page' });
+      if (res.type === "Alumni") {
+        await $router.push({ name: "Member Dashboard Page" });
       } else {
-        await $router.push({ name: 'Admin Dashboard Page' });
+        await $router.push({ name: "Admin Dashboard Page" });
       }
-      showAlert('Berhasil login!', { type: 'success' });
+      showAlert("Berhasil login!", { type: "success" });
       return res;
     })
     .catch((error) => {
-      console.log('err', error);
+      console.log("err", error);
       if (error?.response?.status !== 422) {
         showAlert(error.response.data.message);
         errorsLogin.value.password = [error.response.data.message];
       } else {
         errorsLogin.value = error.response.data.errors;
-        showAlert('Permintaan tidak valid! Mohon cek kembali.');
+        showAlert("Permintaan tidak valid! Mohon cek kembali.");
       }
     })
     .finally(() => {
@@ -332,7 +250,7 @@ watch(
   () => menuStore.isLoginDialogShow,
   (value) => {
     isOpenDialogLogin.value = value;
-  }
+  },
 );
 
 /* GOOGLE RECAPTCHA v3 */
