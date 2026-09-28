@@ -35,7 +35,7 @@ class ContentSeeder extends Seeder
                 'slug' => $i . '-' . $slug,
                 'excerpt' => $excerpt,
                 'body' => $body,
-                'author_id' => User::where('type', 'Administrator')->first()->id,
+                'author_id' => User::whereIn('type', ['admin', 'Administrator'])->first()?->id ?? User::first()->id,
                 'published' => true
             ]);
         }
