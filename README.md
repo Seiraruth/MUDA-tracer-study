@@ -1,4 +1,4 @@
-# 🎓 Tracer Study Alumni SMK
+ # 🎓 Tracer Study Alumni SMK
 
 Sistem Informasi **Tracer Study Alumni SMK** adalah platform web modern berbasis **Laravel 12** dan **Filament v3 Admin Panel** yang dirancang khusus untuk sekolah menengah kejuruan (SMK) dalam melacak indikator keberhasilan lulusan berdasarkan standar Kemendikbudristek: **BMW (Bekerja, Melanjutkan Kuliah, Wirausaha)** serta pengelolaan **Bursa Kerja Khusus (BKK)**.
 
