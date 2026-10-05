@@ -5,8 +5,8 @@
 @section('content')
 <div class="space-y-12 md:space-y-16">
     <!-- Hero -->
-    <section class="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 px-6 py-12 md:px-10 md:py-18 text-center">
-        <i aria-hidden="true" class="fa-solid fa-graduation-cap absolute right-4 top-6 text-[170px] text-blue-100/70 rotate-12 select-none pointer-events-none hidden lg:block"></i>
+    <section class="relative overflow-hidden rounded-2xl border border-brand-100 bg-brand-50 px-6 py-12 md:px-10 md:py-18 text-center">
+        <i aria-hidden="true" class="fa-solid fa-graduation-cap absolute right-4 top-6 text-[170px] text-brand-200/70 rotate-12 select-none pointer-events-none hidden lg:block"></i>
 
         <h2 class="font-display text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-5 md:mb-6">
             Selamat Datang di Tracer Study Alumni SMK
@@ -17,19 +17,16 @@
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="{{ route('alumni.login') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-bold text-base transition-all hover:-translate-y-0.5 shadow-md shadow-blue-900/20 focus-visible:ring-4 focus-visible:ring-blue-200">
+            <a href="{{ route('alumni.login') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-cta text-slate-900 hover:bg-cta-600 font-bold text-base transition-all hover:-translate-y-0.5 shadow-md shadow-slate-900/15 focus-visible:ring-4 focus-visible:ring-cta-600">
                 <i class="fa-solid fa-paper-plane"></i> Masuk & Isi Kuesioner Alumni
-            </a>
-            <a href="{{ route('loker.index') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border-2 border-slate-300 bg-white text-slate-700 hover:border-blue-600 hover:text-blue-700 font-semibold text-base transition-colors">
-                <i class="fa-solid fa-briefcase"></i> Lihat Lowongan Kerja BKK
             </a>
         </div>
     </section>
 
     <!-- Quick Action Cards -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6" aria-label="Informasi pelataran">
-        <article class="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
-            <span class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xl shrink-0">
+        <article class="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md">
+            <span class="w-12 h-12 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl shrink-0">
                 <i class="fa-solid fa-user-check"></i>
             </span>
             <div class="min-w-0">
@@ -40,8 +37,8 @@
             </div>
         </article>
 
-        <article class="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
-            <span class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xl shrink-0">
+        <article class="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md">
+            <span class="w-12 h-12 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl shrink-0">
                 <i class="fa-solid fa-newspaper"></i>
             </span>
             <div class="min-w-0">
@@ -52,8 +49,8 @@
             </div>
         </article>
 
-        <article class="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
-            <span class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xl shrink-0">
+        <article class="bg-white border border-slate-200 rounded-2xl p-6 flex items-start gap-4 transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md">
+            <span class="w-12 h-12 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl shrink-0">
                 <i class="fa-solid fa-chart-pie"></i>
             </span>
             <div class="min-w-0">
@@ -65,58 +62,27 @@
         </article>
     </section>
 
-    <!-- Real-time Statistics Cards -->
-    <section aria-label="Statistik Alumni Terdata" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8">
-        <div class="flex items-center gap-3 mb-6 md:mb-7">
-            <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-lg shrink-0">
-                <i class="fa-solid fa-chart-line"></i>
-            </span>
-            <h3 class="font-display text-lg font-bold text-slate-900">Statistik Terkini Alumni Terdata</h3>
-        </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 h-full text-center">
-                <span class="text-3xl font-extrabold text-blue-900 tracking-tight tabular-nums block">{{ number_format($totalAlumni) }}</span>
-                <span class="text-[11px] font-semibold text-blue-800 uppercase tracking-wide block mt-2">Total Alumni</span>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-xl p-5 h-full text-center">
-                <span class="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums block">{{ number_format($bekerja) }}</span>
-                <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mt-2">Bekerja</span>
-                <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-0.5">{{ $bekerjaPct }}%</span>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-xl p-5 h-full text-center">
-                <span class="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums block">{{ number_format($kuliah) }}</span>
-                <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mt-2">Melanjutkan Kuliah</span>
-                <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-0.5">{{ $kuliahPct }}%</span>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-xl p-5 h-full text-center">
-                <span class="text-3xl font-extrabold text-slate-900 tracking-tight tabular-nums block">{{ number_format($wirausaha) }}</span>
-                <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wide block mt-2">Wirausaha</span>
-                <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-0.5">{{ $wirausahaPct }}%</span>
-            </div>
-        </div>
-    </section>
-
     <!-- Lowongan Kerja Highlights -->
     @if($jobs->count() > 0)
     <section aria-label="Lowongan Kerja BKK" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8">
         <div class="flex items-center justify-between gap-4 mb-6 md:mb-7">
             <div class="flex items-center gap-3">
-                <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-lg shrink-0">
+                <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0">
                     <i class="fa-solid fa-briefcase"></i>
                 </span>
                 <h3 class="font-display text-lg font-bold text-slate-900">Lowongan Kerja BKK Terbaru</h3>
             </div>
-            <a href="{{ route('loker.index') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors">
+            <a href="{{ route('loker.index') }}" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800 transition-colors">
                 Lihat Semua Lowongan <i class="fa-solid fa-arrow-right text-xs"></i>
             </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             @foreach($jobs as $job)
-                <article class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
+                <article class="bg-white border border-slate-200 rounded-xl p-5 flex flex-col transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md">
                     <div class="flex-1">
                         <div class="flex items-center justify-between gap-3 mb-3">
-                            <span class="rounded-md bg-blue-50 text-blue-700 px-2.5 py-1 text-xs font-bold">{{ $job->posisi }}</span>
+                            <span class="rounded-md bg-brand-50 text-brand-700 px-2.5 py-1 text-xs font-bold">{{ $job->posisi }}</span>
                         </div>
                         <h4 class="font-display text-lg font-bold text-slate-900 mb-1.5 leading-snug">{{ $job->judul }}</h4>
                         <p class="text-sm text-slate-600 flex flex-wrap items-center gap-x-1.5 mb-3">
@@ -136,7 +102,7 @@
                                 </span>
                             @endif
                             @if($job->link_pendaftaran)
-                                <a href="{{ $job->link_pendaftaran }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm font-bold transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                                <a href="{{ $job->link_pendaftaran }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-cta text-slate-900 hover:bg-cta-600 text-sm font-bold transition-colors focus-visible:ring-2 focus-visible:ring-cta-600 focus-visible:ring-offset-2">
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Lamar Lowongan
                                 </a>
                             @endif
