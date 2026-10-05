@@ -176,8 +176,3 @@ TRACER-elrahma/
 │   └── ...
 └── routes/web.php              # Rute aplikasi web
 ```
-
----
-
-## 📄 Lisensi
-Sistem Tracer Study SMK dikembangkan berbasis lisensi [MIT License](https://opensource.org/licenses/MIT).
