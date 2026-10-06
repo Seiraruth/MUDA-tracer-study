@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 // Public Homepage & Statistics
 Route::get('/', [TracerController::class, 'index'])->name('home');
 
+// Public Statistics Page (renders the Blade frontend; backend data wiring can be connected later)
+Route::view('/statistik', 'statistik')->name('statistik');
+
 // Alumni Identity Login
 Route::get('/alumni/login', [TracerController::class, 'showLogin'])->name('alumni.login');
 Route::post('/alumni/login', [TracerController::class, 'processLogin'])->name('alumni.login.process');
