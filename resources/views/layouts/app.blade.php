@@ -76,7 +76,7 @@
                            md:flex md:static md:bg-transparent md:border-b-0 md:shadow-none md:flex-row md:items-center md:gap-1 md:p-0">
                     <a href="{{ route('home') }}" class="rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors {{ request()->routeIs('home') ? 'bg-white/15 text-white' : 'text-white/85 hover:bg-white/10 hover:text-white' }}">Beranda</a>
                     <a href="{{ route('loker.index') }}" class="rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors {{ request()->routeIs('loker.index') ? 'bg-white/15 text-white' : 'text-white/85 hover:bg-white/10 hover:text-white' }}">BKK</a>
-                    <span class="rounded-lg px-3.5 py-2 text-sm font-semibold text-white/50 cursor-default select-none" title="Statistik alumni akan tersedia segera">Statistik</span>
+                    <a href="{{ route('statistik') }}" class="rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors {{ request()->routeIs('statistik') ? 'bg-white/15 text-white' : 'text-white/85 hover:bg-white/10 hover:text-white' }}">Statistik</a>
                 </nav>
 
                 <!-- Actions -->
@@ -158,9 +158,9 @@
                                 </a>
                             </li>
                             <li>
-                                <span class="inline-flex items-center gap-2 text-sm text-[#6B7280] cursor-default select-none">
+                                <a href="{{ route('statistik') }}" class="inline-flex items-center gap-2 text-sm text-[#6B7280] hover:text-brand transition-colors">
                                     <i class="fa-solid fa-chevron-right text-[10px] text-brand-400" aria-hidden="true"></i> Statistik
-                                </span>
+                                </a>
                             </li>
                             <li>
                                 <a href="{{ route('alumni.login') }}" class="inline-flex items-center gap-2 text-sm text-[#6B7280] hover:text-brand transition-colors">
@@ -185,9 +185,9 @@
                                 </a>
                             </li>
                             <li>
-                                <span class="inline-flex items-center gap-2 text-sm text-[#6B7280] cursor-default select-none">
+                                <a href="{{ route('statistik') }}" class="inline-flex items-center gap-2 text-sm text-[#6B7280] hover:text-brand transition-colors">
                                     <i class="fa-solid fa-chevron-right text-[10px] text-brand-400" aria-hidden="true"></i> Statistik Alumni
-                                </span>
+                                </a>
                             </li>
                         </ul>
                     </div>
