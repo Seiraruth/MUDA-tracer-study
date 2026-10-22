@@ -32,4 +32,9 @@ class Alumni extends Model
     {
         return $this->hasMany(TracerResponse::class);
     }
+
+    public function responses(): HasMany
+    {
+        return $this->hasMany(TracerResponse::class);
+    }
 }
