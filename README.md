@@ -1,178 +1,165 @@
- # 🎓 Tracer Study Alumni SMK
+# Tracer Study Alumni SMK Muhammadiyah 2 Cikampek
 
-Sistem Informasi **Tracer Study Alumni SMK** adalah platform web modern berbasis **Laravel 12** dan **Filament v3 Admin Panel** yang dirancang khusus untuk sekolah menengah kejuruan (SMK) dalam melacak indikator keberhasilan lulusan berdasarkan standar Kemendikbudristek: **BMW (Bekerja, Melanjutkan Kuliah, Wirausaha)** serta pengelolaan **Bursa Kerja Khusus (BKK)**.
+Aplikasi tracer study untuk mendata perkembangan alumni, mengelola kuesioner, dan menampilkan ringkasan indikator BMW: Bekerja, Melanjutkan Kuliah, dan Wirausaha. Aplikasi menggunakan Laravel 12, Vue 3, Inertia.js, dan Vite.
 
----
+## Fitur
 
-## 🌟 Fitur Utama
+- Login alumni menggunakan NISN dan tanggal lahir, tanpa kata sandi.
+- Kuesioner tracer study dengan pertanyaan sesuai status utama alumni.
+- Halaman publik: beranda, informasi lowongan BKK, dan statistik tracer study.
+- Panel admin berbasis Vue dan Inertia untuk mengelola data alumni, jawaban tracer, lowongan BKK, dan mitra DUDI.
+- Daftar saran alumni untuk ditinjau admin.
+- Dashboard admin dengan ringkasan statistik dan daftar alumni yang belum mengisi tracer tahun berjalan.
 
-- 🔐 **Autentikasi Identity Check Alumni (Tanpa Password):** Validasi aman menggunakan kombinasi **NISN** dan **Tanggal Lahir**.
-- 📋 **Kuesioner Dinamis (Conditional Form):** Form kuesioner interaktif yang tampilannya berubah secara otomatis sesuai status utama yang dipilih alumni (*Bekerja*, *Melanjutkan Kuliah*, *Berwirausaha*, atau *Mencari Kerja*).
-- 💼 **Bursa Kerja Khusus (BKK / Lowongan Kerja):** Portal publik bagi alumni untuk melihat dan melamar lowongan kerja mitra sekolah.
-- 📊 **Filament Admin Panel v3:** Portal khusus pengelola BKK & sekolah dilengkapi dengan:
-  - Widget Statistik Realtime (*Total Alumni*, *% Bekerja*, *% Kuliah*, *% Wirausaha*).
-  - Grafik Distribusi BMW Interaktif (*Doughnut Chart*).
-  - Manajemen Data Alumni, Kuesioner Tracer, dan Lowongan Kerja BKK.
-- 🎨 **Modern Dark Glassmorphism UI:** Tampilan frontend memukau dengan Tailwind CSS, tipografi *Outfit* & *Plus Jakarta Sans*, serta mikro-animasi.
+## Persyaratan
 
----
+- PHP 8.2 atau lebih baru, dengan ekstensi PHP yang diperlukan Laravel dan driver database pilihan Anda.
+- Composer 2 atau lebih baru.
+- Node.js dan npm.
+- SQLite (bawaan paling sederhana) atau MySQL/MariaDB.
 
-## 💻 Persyaratan Sistem (Prerequisites)
+## Menjalankan aplikasi secara lokal
 
-Pastikan perangkat Anda sudah terinstall:
-- **PHP** >= 8.2 (Pastikan ekstensi `pdo_sqlite`, `sqlite3`, dan `zip` aktif di `php.ini`).
-- **Composer** >= 2.x
-- **Node.js** >= 18.x & NPM (Opsional untuk build assets)
-- **Web Browser** modern (Chrome, Edge, Firefox, Safari).
+Perintah berikut menggunakan SQLite, yang merupakan konfigurasi database bawaan di `.env.example`.
 
----
+### 1. Buka terminal di direktori proyek
 
-## 🛠️ Langkah-Langkah Menjalankan Website (Step-by-Step)
+Sesuaikan lokasi direktori jika proyek berada di tempat lain:
 
-Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi di lingkungan lokal:
-
-### 1. Buka Terminal & Masuk ke Direktori Proyek
 ```bash
-cd /path/to/TRACER-elrahma
+cd E:/laragon/www/MUDA-tracer-study
 ```
 
-### 2. Salin File Konfigurasi Environment (`.env`)
-Jika file `.env` belum ada, buat salinan dari `.env.example`:
-```bash
-cp .env.example .env
-```
+### 2. Pasang dependensi PHP dan JavaScript
 
-### 3. Install Dependensi Composer
-Jalankan perintah berikut untuk menginstall dependensi PHP:
 ```bash
-composer install --ignore-platform-reqs
-```
-
-### 3.5 (Opsional) Install Dependensi NPM & Build Assets
-*Catatan: Aplikasi ini dapat langsung berjalan tanpa NPM karena assets Admin Panel (Filament) sudah ter-compile di folder `public/`, dan frontend menggunakan Tailwind CDN. Namun jika Anda ingin mengembangkan atau meng-compile aset Vite tersendiri:*
-```bash
+composer install
 npm install
-npm run dev   # Untuk mode development
-# ATAU
-npm run build # Untuk mode produksi
 ```
 
-### 4. Generate Application Key
+### 3. Siapkan file environment
+
+Buat `.env` dari template jika file tersebut belum tersedia.
+
+PowerShell:
+
+```powershell
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+```
+
+Git Bash, Linux, atau macOS:
+
+```bash
+test -f .env || cp .env.example .env
+```
+
+### 4. Buat application key
+
 ```bash
 php artisan key:generate
 ```
 
-### 5. Opsi Konfigurasi Database (SQLite atau MySQL)
+### 5. Siapkan database
 
-Aplikasi ini mendukung 2 opsi driver database:
+Untuk SQLite, pastikan file database tersedia. Perintah ini aman dijalankan jika file sudah ada.
 
-#### 🟢 Opsi A: SQLite (Default & Paling Praktis - Tanpa Server Database Tambahan)
-Pastikan file `database/database.sqlite` sudah tersedia:
+PowerShell:
 
-- **Windows (PowerShell):**
-  ```powershell
-  if (-not (Test-Path database/database.sqlite)) { New-Item -ItemType File database/database.sqlite }
-  ```
-- **Linux / macOS / Git Bash:**
-  ```bash
-  touch database/database.sqlite
-  ```
-
-#### 🟡 Opsi B: MySQL / MariaDB (Laragon / phpMyAdmin)
-Jika Anda ingin menggunakan server MySQL (seperti di Laragon):
-1. Buat database baru bernama `tracer_smk` di MySQL / phpMyAdmin / HeidiSQL.
-2. Buka file `.env` dan ganti konfigurasi database menjadi:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=tracer_smk
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
-
-#### 🚀 Jalankan Migration & Seeder
-Setelah memilih salah satu driver di atas, jalankan perintah berikut untuk membuat tabel & mengisi data demo:
-```bash
-php artisan migrate:fresh --seed
+```powershell
+if (-not (Test-Path database/database.sqlite)) { New-Item -ItemType File database/database.sqlite }
 ```
 
-### 6. Jalankan Server lokal Laravel
+Git Bash, Linux, atau macOS:
+
 ```bash
-php artisan serve
+test -f database/database.sqlite || touch database/database.sqlite
 ```
-Server akan berjalan di `http://127.0.0.1:8000`.
 
----
+Pastikan `.env` memakai konfigurasi SQLite berikut:
 
-## 🔑 Akun & Data Contoh untuk Pengujian (Demo Data)
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+```
 
-### A. Portal Admin BKK (Filament Admin Panel)
-- **URL Admin:** [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
-- **Email:** `admin@tracer.smk.sch.id`
-- **Password:** `password`
+Jika menggunakan MySQL/MariaDB, buat database terlebih dahulu lalu atur kredensial koneksi di `.env`, misalnya:
 
----
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=tracer_smk
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-### B. Portal Alumni (Identity Check Login)
-- **URL Alumni:** [http://127.0.0.1:8000/alumni/login](http://127.0.0.1:8000/alumni/login)
-- Gunakan salah satu sampel data NISN + Tanggal Lahir di bawah ini untuk melakukan uji coba verifikasi login alumni:
+### 6. Jalankan migrasi
 
-| Nama Alumni | NISN | Tanggal Lahir | Jurusan | Status Demo |
-| :--- | :--- | :--- | :--- | :--- |
-| **Budi Santoso** | `0051234501` | `2005-04-12` | Teknik Komputer & Jaringan (TKJ) | Bekerja (PT Telkom) |
-| **Siti Nurhaliza** | `0051234502` | `2005-08-20` | Rekayasa Perangkat Lunak (RPL) | Bekerja (Web Dev) |
-| **Rian Hidayat** | `0051234503` | `2005-11-03` | Rekayasa Perangkat Lunak (RPL) | Kuliah (UGM TI) |
-| **Dewi Anggraini** | `0051234504` | `2005-02-15` | Akuntansi & Keuangan (AKL) | Wirausaha (Catering) |
-| **Agus Setiawan** | `0051234505` | `2005-06-25` | Teknik Kendaraan Ringan (TKR) | Bekerja (Mekanik AHM) |
-| **Lestari Putri** | `0051234506` | `2005-09-10` | Multimedia (MM) | Mencari Kerja |
+```bash
+php artisan migrate
+```
 
----
+Untuk membuat akun admin dan mengisi data contoh, jalankan seeder:
 
-## 🧪 Menjalankan Automated Unit & Feature Test
+```bash
+php artisan db:seed
+```
 
-Untuk memastikan seluruh fungsi rute, autentikasi NISN, penyimpanan kuesioner, dan halaman loker berjalan tanpa masalah, jalankan pengujian berikut:
+Seeder memakai `updateOrCreate` untuk akun admin dan data alumni contoh. Seeder lowongan membuat entri baru saat dijalankan, jadi hindari menjalankannya berulang kali pada database yang sama jika tidak ingin lowongan contoh terduplikasi.
+
+### 7. Jalankan Laravel dan Vite
+
+```bash
+npm start
+```
+
+Perintah tersebut menjalankan server Laravel dan Vite bersamaan. Buka aplikasi di [http://127.0.0.1:8000](http://127.0.0.1:8000). Biarkan terminal tetap berjalan selama aplikasi digunakan.
+
+Jika hanya ingin membuat aset produksi, jalankan:
+
+```bash
+npm run build
+```
+
+## URL aplikasi
+
+| Halaman | URL lokal |
+| --- | --- |
+| Beranda | `http://127.0.0.1:8000/` |
+| Login alumni | `http://127.0.0.1:8000/alumni/login` |
+| Lowongan BKK | `http://127.0.0.1:8000/loker` |
+| Statistik publik | `http://127.0.0.1:8000/statistik` |
+| Login admin | `http://127.0.0.1:8000/admin/login` |
+
+Setelah login admin, halaman pengelolaan dapat dibuka melalui navigasi panel admin.
+
+## Akun lokal untuk pengembangan
+
+Seeder membuat akun admin berikut:
+
+- Email: `admin@tracer.smk.sch.id`
+- Kata sandi: `password`
+
+Seeder juga memasukkan data alumni contoh. Gunakan NISN dan tanggal lahir pada `database/seeders/DatabaseSeeder.php` untuk mencoba login alumni.
+
+**Peringatan:** kredensial tersebut hanya untuk pengembangan lokal. Ganti kata sandi dan kelola akun secara aman sebelum aplikasi digunakan di lingkungan lain.
+
+## Pengujian
+
+Jalankan test Laravel dengan:
 
 ```bash
 php artisan test
 ```
 
-Hasil test suite:
-```
-  PASS  Tests\Unit\ExampleTest
-  ✓ that true is true
+## Struktur proyek
 
-  PASS  Tests\Feature\ExampleTest
-  ✓ the application returns a successful response
-
-  PASS  Tests\Feature\TracerStudyTest
-  ✓ homepage loads successfully
-  ✓ alumni login validation
-  ✓ alumni can submit kuesioner
-  ✓ loker page loads
-
-  Tests: 6 passed (14 assertions)
-```
-
----
-
-## 📂 Struktur Direktori Proyek
-
-```
-TRACER-elrahma/
-├── app/
-│   ├── Filament/               # Admin Panel Filament (Resources & Widgets)
-│   │   ├── Resources/          # AlumniResource, TracerResponseResource, JobPostingResource
-│   │   └── Widgets/            # StatsOverview, BmwChartWidget
-│   ├── Http/Controllers/       # TracerController (Frontend Alumni & Loker)
-│   └── Models/                 # Eloquent Models (Alumni, TracerResponse, JobPosting)
-├── database/
-│   ├── migrations/             # Tabel Alumni, Tracer Responses, Job Postings
-│   └── seeders/                # DatabaseSeeder (Admin, Alumni Demo, Loker)
-├── resources/views/
-│   ├── layouts/app.blade.php   # Layout Utama Frontend (Tailwind + Icons)
-│   ├── welcome.blade.php       # Homepage Hero & Statistik Realtime
-│   ├── alumni/                 # Views Login, Kuesioner Dinamis, Sukses, Loker
-│   └── ...
-└── routes/web.php              # Rute aplikasi web
+```text
+app/Http/Controllers/      Controller halaman publik dan admin
+app/Models/                Model Eloquent
+database/migrations/       Struktur tabel
+database/seeders/          Akun admin dan data contoh
+resources/js/Pages/Admin/  Halaman admin Vue
+resources/views/           Tampilan publik Blade
+routes/web.php             Rute aplikasi
 ```
