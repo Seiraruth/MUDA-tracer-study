@@ -2,99 +2,66 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-    title: {
-        type: String,
-        required: true,
-    },
-    value: {
-        type: [Number, String],
-        required: true,
-    },
-    subtitle: {
-        type: String,
-        default: '',
-    },
-    percentage: {
-        type: [Number, String],
-        default: null,
-    },
-    badge: {
-        type: String,
-        default: null,
-    },
-    color: {
-        type: String,
-        default: 'indigo', // 'indigo', 'emerald', 'blue', 'amber', 'rose'
-    },
-    icon: {
-        type: [Object, Function],
-        default: null,
-    },
+    title: { type: String, required: true },
+    value: { type: [Number, String], required: true },
+    subtitle: { type: String, default: '' },
+    percentage: { type: [Number, String], default: null },
+    badge: { type: String, default: null },
+    color: { type: String, default: 'primary' },
+    icon: { type: [Object, Function], default: null },
 });
 
 const colorClasses = computed(() => {
     switch (props.color) {
         case 'emerald':
             return {
-                bg: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-                ring: 'hover:border-emerald-200',
-                badge: 'bg-emerald-100/80 text-emerald-700',
-                bar: 'bg-emerald-500',
+                bg: 'bg-emerald-100 text-emerald-600',
+                badge: 'bg-emerald-100 text-emerald-700',
                 indicator: 'text-emerald-600',
             };
         case 'blue':
             return {
-                bg: 'bg-blue-50 text-blue-600 border-blue-100',
-                ring: 'hover:border-blue-200',
-                badge: 'bg-blue-100/80 text-blue-700',
-                bar: 'bg-blue-500',
+                bg: 'bg-blue-100 text-blue-600',
+                badge: 'bg-blue-100 text-blue-700',
                 indicator: 'text-blue-600',
             };
         case 'amber':
             return {
-                bg: 'bg-amber-50 text-amber-600 border-amber-100',
-                ring: 'hover:border-amber-200',
-                badge: 'bg-amber-100/80 text-amber-700',
-                bar: 'bg-amber-500',
+                bg: 'bg-amber-100 text-amber-600',
+                badge: 'bg-amber-100 text-amber-700',
                 indicator: 'text-amber-600',
             };
         case 'rose':
             return {
-                bg: 'bg-rose-50 text-rose-600 border-rose-100',
-                ring: 'hover:border-rose-200',
-                badge: 'bg-rose-100/80 text-rose-700',
-                bar: 'bg-rose-500',
+                bg: 'bg-rose-100 text-rose-600',
+                badge: 'bg-rose-100 text-rose-700',
                 indicator: 'text-rose-600',
             };
-        case 'indigo':
+        case 'primary':
         default:
             return {
-                bg: 'bg-indigo-50 text-indigo-600 border-indigo-100',
-                ring: 'hover:border-indigo-200',
-                badge: 'bg-indigo-100/80 text-indigo-700',
-                bar: 'bg-indigo-500',
-                indicator: 'text-indigo-600',
+                bg: 'bg-primary-100 text-primary-600',
+                badge: 'bg-primary-100 text-primary-700',
+                indicator: 'text-primary-600',
             };
     }
 });
 </script>
 
 <template>
-    <div
-        class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between"
-    >
+    <div class="bg-white rounded-xl p-4 border border-surface-200 shadow-premium shadow-premium-hover hover-lift stat-glow">
         <div class="flex items-start justify-between">
-            <div class="space-y-1">
-                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <div class="space-y-0.5">
+                <span class="text-[11px] font-medium text-surface-500 uppercase tracking-wide">
                     {{ title }}
                 </span>
-                <div class="flex items-baseline gap-2 pt-0.5">
-                    <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <div class="flex items-baseline gap-1.5">
+                    <span class="text-2xl font-bold text-surface-900">
                         {{ value }}
                     </span>
                     <span
                         v-if="percentage !== null"
-                        class="text-xs font-bold px-2 py-0.5 rounded-full"
+                        class="text-[10px] font-semibold px-1.5 py-0.5 rounded"
                         :class="colorClasses.badge"
                     >
                         {{ percentage }}%
@@ -103,15 +70,15 @@ const colorClasses = computed(() => {
             </div>
             <div
                 v-if="icon"
-                class="w-12 h-12 rounded-xl flex items-center justify-center border transition-transform duration-200 group-hover:scale-105"
+                class="w-10 h-10 rounded-lg flex items-center justify-center"
                 :class="colorClasses.bg"
             >
-                <component :is="icon" class="w-6 h-6" />
+                <component :is="icon" class="w-5 h-5 icon-pulse" />
             </div>
         </div>
 
-        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-500">{{ subtitle }}</span>
+        <div class="mt-3 pt-2.5 border-t border-surface-100 flex items-center justify-between text-[11px]">
+            <span class="text-surface-500">{{ subtitle }}</span>
             <span v-if="badge" class="font-semibold" :class="colorClasses.indicator">
                 {{ badge }}
             </span>

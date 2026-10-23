@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AlumniController as AdminAlumniController;
 use App\Http\Controllers\Admin\TracerResponsesController as AdminTracerResponsesController;
 use App\Http\Controllers\Admin\JobPostingsController as AdminJobPostingsController;
+use App\Http\Controllers\Admin\MitraController as AdminMitraController;
+use App\Http\Controllers\Admin\SaranController as AdminSaranController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TracerController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,8 +18,8 @@ Route::get('/login', fn () => redirect()->route('admin.login'))->name('login');
 // Public Homepage & Statistics
 Route::get('/', [TracerController::class, 'index'])->name('home');
 
-// Public Statistics Page (renders the Blade frontend; backend data wiring can be connected later)
-Route::view('/statistik', 'statistik')->name('statistik');
+// Public Statistics Page
+Route::get('/statistik', [StatisticsController::class, 'index'])->name('statistik');
 
 // Alumni Identity Login
 Route::get('/alumni/login', [TracerController::class, 'showLogin'])->name('alumni.login');
@@ -67,6 +70,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/job-postings', [AdminJobPostingsController::class, 'store'])->name('admin.jobs.store');
         Route::put('/job-postings/{jobPosting}', [AdminJobPostingsController::class, 'update'])->name('admin.jobs.update');
         Route::delete('/job-postings/{jobPosting}', [AdminJobPostingsController::class, 'destroy'])->name('admin.jobs.destroy');
+
+        // Mitra DUDI
+        Route::get('/mitras', [AdminMitraController::class, 'index'])->name('admin.mitras.index');
+        Route::post('/mitras', [AdminMitraController::class, 'store'])->name('admin.mitras.store');
+        Route::put('/mitras/{mitra}', [AdminMitraController::class, 'update'])->name('admin.mitras.update');
+        Route::delete('/mitras/{mitra}', [AdminMitraController::class, 'destroy'])->name('admin.mitras.destroy');
+
+        // Saran Alumni
+        Route::get('/saran', [AdminSaranController::class, 'index'])->name('admin.saran.index');
     });
 });
 

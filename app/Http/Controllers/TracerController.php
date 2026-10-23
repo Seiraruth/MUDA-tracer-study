@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alumni;
 use App\Models\JobPosting;
 use App\Models\TracerResponse;
+use App\Models\Mitra;
 use Illuminate\Http\Request;
 
 class TracerController extends Controller
@@ -30,6 +31,11 @@ class TracerController extends Controller
             ->take(4)
             ->get();
 
+        $mitras = Mitra::where('is_active', true)
+            ->latest()
+            ->take(6)
+            ->get();
+
         return view('welcome', compact(
             'totalAlumni',
             'totalResponses',
@@ -40,7 +46,8 @@ class TracerController extends Controller
             'bekerjaPct',
             'kuliahPct',
             'wirausahaPct',
-            'jobs'
+            'jobs',
+            'mitras'
         ));
     }
 

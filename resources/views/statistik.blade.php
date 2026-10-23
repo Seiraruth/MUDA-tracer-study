@@ -46,7 +46,7 @@
     ];
 @endphp
 
-<div class="space-y-12 md:space-y-16">
+<div class="statistics-page space-y-12 md:space-y-16">
 
     <!-- ================= Header ================= -->
     <section class="relative overflow-hidden rounded-2xl border border-brand-100 bg-brand-50 px-6 py-10 md:px-10 md:py-14 text-center" aria-label="Header Statistik Tracer Study">
@@ -65,7 +65,7 @@
     </section>
 
     <!-- ================= Filter Tahun Lulusan ================= -->
-    <section class="bg-white border border-slate-200 rounded-2xl p-5 md:p-6" aria-label="Filter Tahun Lulusan">
+    <section class="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 transition-colors duration-200 hover:border-brand-300" aria-label="Filter Tahun Lulusan">
         <div class="flex flex-col sm:flex-row sm:items-center gap-4">
             <label for="filter-tahun-lulus" class="flex items-center gap-3 shrink-0 cursor-pointer">
                 <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0" aria-hidden="true">
@@ -93,10 +93,10 @@
     </section>
 
     <!-- ================= Statistik Umum (overview cards) ================= -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" aria-label="Statistik Umum Alumni">
-        <article class="bg-brand-50 border border-brand-200 rounded-2xl p-6 flex flex-col space-y-4">
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children" aria-label="Statistik Umum Alumni">
+        <article class="statistics-card group bg-brand-50 border border-brand-200 rounded-2xl p-6 flex flex-col space-y-4 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400 hover:shadow-lg hover:shadow-brand-900/10">
             <span class="w-12 h-12 rounded-xl bg-brand text-white flex items-center justify-center text-xl shrink-0" aria-hidden="true">
-                <i class="fa-solid fa-users"></i>
+                <i class="fa-solid fa-users transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:animate-pulse"></i>
             </span>
             <p class="text-3xl font-extrabold text-brand-900 tracking-tight tabular-nums leading-none">{{ number_format($totalAlumni) }}</p>
             <div>
@@ -106,10 +106,10 @@
         </article>
 
         @foreach($overviewCards as $card)
-            <article class="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col space-y-4">
+            <article class="statistics-card group bg-white border border-slate-200 rounded-2xl p-6 flex flex-col space-y-4 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg hover:shadow-slate-900/10">
                 <div class="flex items-center justify-between">
                     <span class="w-12 h-12 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-xl shrink-0" aria-hidden="true">
-                        <i class="fa-solid {{ $card['icon'] }}"></i>
+                        <i class="fa-solid {{ $card['icon'] }} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"></i>
                     </span>
                     <span class="inline-flex items-center rounded-full bg-brand-50 text-brand-800 text-xs font-bold px-2.5 py-1 tabular-nums">{{ $card['pct'] }}%</span>
                 </div>
@@ -126,10 +126,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
         <!-- A. Employment status (horizontal bar chart) -->
-        <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-7" aria-label="Status Pekerjaan Alumni">
+        <section class="group bg-white border border-slate-200 rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md" aria-label="Status Pekerjaan Alumni">
             <div class="flex items-center gap-3 mb-6">
                 <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0" aria-hidden="true">
-                    <i class="fa-solid fa-chart-column"></i>
+                    <i class="fa-solid fa-chart-column transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse"></i>
                 </span>
                 <div class="min-w-0 flex-1">
                     <h2 class="font-display text-lg font-bold text-slate-900">Status Pekerjaan Alumni</h2>
@@ -144,7 +144,7 @@
                         <div class="flex items-center gap-3">
                             <span class="w-32 sm:w-36 shrink-0 text-sm font-semibold text-slate-700">{{ $row['label'] }}</span>
                             <div class="flex-1 h-3.5 rounded-full bg-slate-200">
-                                <div class="{{ $row['bar'] }} h-3.5 rounded-full" style="width: {{ max(0, min(100, $row['pct'])) }}%"></div>
+                                <div class="{{ $row['bar'] }} h-3.5 rounded-full statistics-bar" style="--bar-width: {{ max(0, min(100, $row['pct'])) }}%"></div>
                             </div>
                             <span class="w-20 text-right shrink-0 text-sm font-bold text-slate-900 tabular-nums">{{ $row['count'] }} <span class="text-slate-400 font-semibold">({{ $row['pct'] }}%)</span></span>
                         </div>
@@ -171,10 +171,10 @@
         </section>
 
         <!-- B. Career & further education info -->
-        <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-7" aria-label="Informasi Karir dan Pendidikan Lanjutan">
+        <section class="group bg-white border border-slate-200 rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md" aria-label="Informasi Karir dan Pendidikan Lanjutan">
             <div class="flex items-center gap-3 mb-6">
                 <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0" aria-hidden="true">
-                    <i class="fa-solid fa-chart-pie"></i>
+                    <i class="fa-solid fa-chart-pie transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"></i>
                 </span>
                 <div class="min-w-0 flex-1">
                     <h2 class="font-display text-lg font-bold text-slate-900">Distribusiya Karir Alumni</h2>
@@ -189,9 +189,9 @@
                         <span class="tabular-nums">{{ number_format($placedTotal) }} alumni</span>
                     </div>
                     <div class="flex h-4 rounded-full bg-slate-200 overflow-hidden" role="img" aria-label="Distribusiya alumni per kategori karir">
-                        <span class="bg-brand-600" style="width: {{ $bekerjaShare }}%" title="Bekerja {{ $bekerjaShare }}%"></span>
-                        <span class="bg-cta-600" style="width: {{ $kuliahShare }}%" title="Melanjutkan Kuliah {{ $kuliahShare }}%"></span>
-                        <span class="bg-brand-400" style="width: {{ $wirausahaShare }}%" title="Wirausaha {{ $wirausahaShare }}%"></span>
+                        <span class="bg-brand-600 statistics-bar" style="--bar-width: {{ $bekerjaShare }}%" title="Bekerja {{ $bekerjaShare }}%"></span>
+                        <span class="bg-cta-600 statistics-bar statistics-bar-delay-1" style="--bar-width: {{ $kuliahShare }}%" title="Melanjutkan Kuliah {{ $kuliahShare }}%"></span>
+                        <span class="bg-brand-400 statistics-bar statistics-bar-delay-2" style="--bar-width: {{ $wirausahaShare }}%" title="Wirausaha {{ $wirausahaShare }}%"></span>
                     </div>
                     <div class="flex flex-wrap gap-x-4 mt-2.5 text-xs">
                         <span class="inline-flex items-center gap-1.5 text-slate-700"><i class="w-2.5 h-2.5 rounded-full bg-brand-600" aria-hidden="true"></i> Bekerja {{ $bekerjaShare }}%</span>
@@ -211,7 +211,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                 @foreach($careerPanels as $panel)
-                    <article class="bg-white border border-slate-200 rounded-xl p-4 flex flex-col gap-2.5">
+                    <article class="group bg-white border border-slate-200 rounded-xl p-4 flex flex-col gap-2.5 transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md">
                         <div class="flex items-center gap-2.5">
                             <span class="w-9 h-9 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center text-base shrink-0" aria-hidden="true">
                                 <i class="fa-solid {{ $panel['icon'] }}"></i>
@@ -228,10 +228,10 @@
         </section>
 
         <!-- ================= Indikator Tambahan ================= -->
-    <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8" aria-label="Indikator Tambahan Tracer Study">
+    <section class="group bg-white border border-slate-200 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md" aria-label="Indikator Tambahan Tracer Study">
         <div class="flex items-center gap-3 mb-6">
             <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0" aria-hidden="true">
-                <i class="fa-solid fa-scale-balanced"></i>
+                <i class="fa-solid fa-scale-balanced transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"></i>
             </span>
             <div class="min-w-0 flex-1">
                 <h2 class="font-display text-lg font-bold text-slate-900">Indikator Tambahan Tracer Study</h2>
@@ -252,7 +252,7 @@
                 @if(isset($linearPct) && $linearPct !== null)
                     <div class="flex items-center gap-3">
                         <div class="flex-1 h-3 rounded-full bg-slate-200">
-                            <div class="bg-brand-600 h-3 rounded-full" style="width: {{ max(0, min(100, $linearPct)) }}%"></div>
+                            <div class="bg-brand-600 h-3 rounded-full transition-all duration-700 ease-out" style="width: {{ max(0, min(100, $linearPct)) }}%"></div>
                         </div>
                         <span class="text-sm font-extrabold text-brand-800 tabular-nums w-14 text-right">{{ $linearPct }}%</span>
                     </div>
@@ -287,11 +287,11 @@
     </section>
 
     <!-- ================= Data Statistik Alumni (table) ================= -->
-    <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8" aria-label="Data Statistik Alumni">
+    <section class="group bg-white border border-slate-200 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md" aria-label="Data Statistik Alumni">
         <div class="flex items-center justify-between gap-3 flex-wrap mb-6">
             <div class="flex items-center gap-3">
                 <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0" aria-hidden="true">
-                    <i class="fa-solid fa-table"></i>
+                    <i class="fa-solid fa-table transition-transform duration-300 group-hover:scale-110"></i>
                 </span>
                 <div class="min-w-0 flex-1">
                     <h2 class="font-display text-lg font-bold text-slate-900">Data Statistik Alumni</h2>
@@ -319,7 +319,7 @@
                 <tbody class="divide-y divide-slate-200">
                     @if(count($statistikRows ?? []) > 0)
                         @foreach($statistikRows as $row)
-                            <tr class="hover:bg-slate-50">
+                            <tr class="transition-colors duration-200 hover:bg-brand-50">
                                 <td class="px-4 py-3 text-slate-500 tabular-nums">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-3 font-semibold text-slate-900 tabular-nums whitespace-nowrap">Lulusan {{ $row['tahun'] ?? '' }}</td>
                                 <td class="px-4 py-3 text-right tabular-nums font-semibold text-slate-900">{{ number_format($row['total_alumni'] ?? 0) }}</td>

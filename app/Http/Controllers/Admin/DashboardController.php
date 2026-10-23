@@ -74,6 +74,14 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        // Alumni yang belum lengkap tracer (belum isi sama sekali)
+        $belumIsi = Alumni::whereDoesntHave('tracerResponses', function ($q) {
+            $q->where('tahun_tracer', date('Y'));
+        })
+        ->orderBy('tahun_lulus')
+        ->take(10)
+        ->get();
+
         return Inertia::render('Admin/Dashboard', [
             'stats' => [
                 'totalAlumni' => $totalAlumni,
@@ -96,6 +104,7 @@ class DashboardController extends Controller
             'byJurusan' => $byJurusan,
             'recentResponses' => $recentResponses,
             'recentJobs' => $recentJobs,
+            'belumIsi' => $belumIsi,
         ]);
     }
 }

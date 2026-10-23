@@ -33,87 +33,82 @@ const nonLinearPercentage = computed(() => {
 </script>
 
 <template>
-    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
-        <div>
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div>
-                    <h3 class="font-bold text-base text-slate-900 tracking-tight flex items-center gap-2">
-                        Linearitas Bidang Pekerjaan
-                    </h3>
-                    <p class="text-xs text-slate-500">Kesesuaian pekerjaan alumni dengan jurusan SMK</p>
+    <div class="bg-white rounded-xl p-5 border border-surface-200/60 flex flex-col hover-lift stat-pulse-hover">
+        <div class="flex items-center justify-between pb-3 border-b border-surface-100">
+            <div>
+                <h3 class="font-semibold text-surface-900 text-sm">
+                    Linearitas Pekerjaan
+                </h3>
+                <p class="text-xs text-surface-500">Kesesuaian dengan kompetensi</p>
+            </div>
+            <span class="text-[10px] font-medium px-2 py-1 rounded bg-primary-50 text-primary-700 border border-primary-100">
+                {{ total }} bekerja
+            </span>
+        </div>
+
+        <div class="mt-4 space-y-4">
+            <!-- Main Gauge -->
+            <div class="flex items-center justify-between p-3 rounded-lg bg-surface-50 border border-surface-200/60">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-success/10 text-success flex items-center justify-center">
+                        <Sparkles class="w-4 h-4" />
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-medium text-surface-500 uppercase tracking-wide">
+                            Keselarasan
+                        </span>
+                        <div class="text-xl font-bold text-surface-900">
+                            {{ linearPercentage }}%
+                        </div>
+                    </div>
                 </div>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
-                    {{ total }} Alumni Bekerja
-                </span>
+                <div class="text-right">
+                    <span class="text-[10px] font-medium text-success">
+                        {{ props.linearCount }} dari {{ total }}
+                    </span>
+                </div>
             </div>
 
-            <div class="mt-6 space-y-5">
-                <!-- Main Percentage Gauge -->
-                <div class="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-200/60">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
-                            <Sparkles class="w-5 h-5" />
-                        </div>
-                        <div>
-                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                                Indeks Keselarasan Vokasi
-                            </span>
-                            <div class="text-2xl font-extrabold text-slate-900">
-                                {{ linearPercentage }}%
-                            </div>
-                        </div>
+            <!-- Progress Bar -->
+            <div class="h-2 w-full rounded-full bg-surface-200 flex overflow-hidden">
+                <div
+                    class="h-full bg-success transition-all duration-300"
+                    :style="{ width: `${linearPercentage}%` }"
+                ></div>
+                <div
+                    class="h-full bg-warning transition-all duration-300"
+                    :style="{ width: `${nonLinearPercentage}%` }"
+                ></div>
+            </div>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-2 gap-2">
+                <div class="p-2.5 rounded-lg border border-success/20 bg-success/5">
+                    <div class="flex items-center gap-1.5 mb-1">
+                        <CheckCircle2 class="w-3 h-3 text-success" />
+                        <span class="text-[10px] font-medium text-surface-700">Sesuai</span>
                     </div>
-                    <div class="text-right">
-                        <span class="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                            {{ props.linearCount }} dari {{ total }} Sesuai
-                        </span>
-                        <p class="text-[11px] text-slate-400 mt-1">Relevan dengan Kompetensi Keahlian</p>
+                    <div class="text-lg font-semibold text-surface-900">
+                        {{ props.linearCount }}
                     </div>
+                    <div class="text-[9px] text-surface-500">{{ linearPercentage }}%</div>
                 </div>
 
-                <!-- Dual Segment Progress Bar -->
-                <div>
-                    <div class="h-3 w-full rounded-full bg-slate-100 flex overflow-hidden p-0.5">
-                        <div
-                            class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500"
-                            :style="{ width: `${linearPercentage}%` }"
-                        ></div>
-                        <div
-                            class="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500 ml-0.5"
-                            :style="{ width: `${nonLinearPercentage}%` }"
-                        ></div>
+                <div class="p-2.5 rounded-lg border border-warning/20 bg-warning/5">
+                    <div class="flex items-center gap-1.5 mb-1">
+                        <AlertTriangle class="w-3 h-3 text-warning" />
+                        <span class="text-[10px] font-medium text-surface-700">Lintas</span>
                     </div>
-                </div>
-
-                <!-- Breakdown Comparison Cards -->
-                <div class="grid grid-cols-2 gap-3 pt-1">
-                    <div class="p-3.5 rounded-xl border border-emerald-100 bg-emerald-50/50">
-                        <div class="flex items-center gap-2 mb-1">
-                            <CheckCircle2 class="w-4 h-4 text-emerald-600" />
-                            <span class="text-xs font-bold text-emerald-900">Linear / Sesuai</span>
-                        </div>
-                        <div class="text-xl font-bold text-emerald-950">
-                            {{ props.linearCount }} <span class="text-xs font-normal text-emerald-700">alumni</span>
-                        </div>
-                        <p class="text-[11px] text-emerald-600 font-semibold">{{ linearPercentage }}% dari yang bekerja</p>
+                    <div class="text-lg font-semibold text-surface-900">
+                        {{ props.nonLinearCount }}
                     </div>
-
-                    <div class="p-3.5 rounded-xl border border-amber-100 bg-amber-50/50">
-                        <div class="flex items-center gap-2 mb-1">
-                            <AlertTriangle class="w-4 h-4 text-amber-600" />
-                            <span class="text-xs font-bold text-amber-900">Lintas Bidang</span>
-                        </div>
-                        <div class="text-xl font-bold text-amber-950">
-                            {{ props.nonLinearCount }} <span class="text-xs font-normal text-amber-700">alumni</span>
-                        </div>
-                        <p class="text-[11px] text-amber-600 font-semibold">{{ nonLinearPercentage }}% dari yang bekerja</p>
-                    </div>
+                    <div class="text-[9px] text-surface-500">{{ nonLinearPercentage }}%</div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-6 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-between">
-            <span>Evaluasi Link and Match DUDI (Dunia Usaha & Dunia Industri)</span>
+        <div class="mt-3 pt-2.5 border-t border-surface-100 text-[10px] text-surface-500">
+            Evaluasi link & match dengan DUDI
         </div>
     </div>
 </template>

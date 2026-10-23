@@ -188,13 +188,13 @@ const submitImport = () => {
     <AdminLayout title="Data Alumni SMK">
         <div class="space-y-6 max-w-7xl mx-auto">
             <!-- Header bar with Actions -->
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-surface-200 animate-in">
                 <div>
-                    <h2 class="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                        <Users class="w-5 h-5 text-indigo-600" />
+                    <h2 class="text-xl font-bold text-surface-900 tracking-tight flex items-center gap-2">
+                        <Users class="w-5 h-5 text-primary-600 icon-pulse" />
                         <span>Database Alumni</span>
                     </h2>
-                    <p class="text-xs text-slate-500 mt-1">
+                    <p class="text-xs text-surface-600 mt-1">
                         Total {{ alumni.total }} alumni tercatat di sistem tracer study.
                     </p>
                 </div>
@@ -204,26 +204,26 @@ const submitImport = () => {
                     <!-- Export Button -->
                     <a
                         :href="exportUrl"
-                        class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold transition-all hover:scale-[1.01] active:scale-[0.99]"
+                        class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white hover:bg-surface-50 text-surface-700 border border-surface-200 text-xs font-semibold transition-all hover-lift"
                         title="Unduh seluruh atau data hasil filter ke file Excel"
                     >
-                        <Download class="w-4 h-4 text-emerald-600" />
+                        <Download class="w-4 h-4 text-success icon-pulse" />
                         <span>Ekspor Excel</span>
                     </a>
 
                     <!-- Import Button -->
                     <button
                         @click="openImportModal"
-                        class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 text-indigo-700 border border-indigo-200 text-xs font-semibold transition-all hover:scale-[1.01] active:scale-[0.99]"
+                        class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-primary-50 hover:bg-primary-100 text-primary-700 border border-primary-200 text-xs font-semibold transition-all hover-lift"
                     >
-                        <Upload class="w-4 h-4 text-indigo-600" />
+                        <Upload class="w-4 h-4 text-primary-600 icon-pulse" />
                         <span>Impor Excel</span>
                     </button>
 
                     <!-- Add Alumni Button -->
                     <button
                         @click="openCreateModal"
-                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-indigo-600/30 hover:scale-[1.02] active:scale-[0.98]"
+                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold transition-all shadow-md hover-lift"
                     >
                         <Plus class="w-4 h-4" />
                         <span>Tambah Alumni Baru</span>
@@ -232,16 +232,16 @@ const submitImport = () => {
             </div>
 
             <!-- Filters Bar -->
-            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs grid grid-cols-1 sm:grid-cols-12 gap-3">
+            <div class="bg-white p-4 rounded-2xl border border-surface-200 grid grid-cols-1 sm:grid-cols-12 gap-3 animate-in animate-in-delay-1">
                 <!-- Search Box -->
                 <div class="sm:col-span-5 relative">
-                    <Search class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <Search class="w-4 h-4 text-surface-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                         v-model="search"
                         @keyup.enter="applyFilters"
                         type="text"
                         placeholder="Cari nama, NISN, atau email..."
-                        class="w-full pl-10 pr-4 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                        class="w-full pl-10 pr-4 py-2 text-xs rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors text-surface-900"
                     />
                 </div>
 
@@ -250,7 +250,7 @@ const submitImport = () => {
                     <select
                         v-model="selectedJurusan"
                         @change="applyFilters"
-                        class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500 text-slate-700"
+                        class="w-full px-3 py-2 text-xs rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 text-surface-800"
                     >
                         <option value="">Semua Jurusan</option>
                         <option v-for="jurusan in jurusanOptions" :key="jurusan" :value="jurusan">
@@ -264,7 +264,7 @@ const submitImport = () => {
                     <select
                         v-model="selectedTahun"
                         @change="applyFilters"
-                        class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500 text-slate-700"
+                        class="w-full px-3 py-2 text-xs rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 text-surface-800"
                     >
                         <option value="">Semua Tahun</option>
                         <option v-for="tahun in tahunOptions" :key="tahun" :value="tahun">
@@ -277,13 +277,13 @@ const submitImport = () => {
                 <div class="sm:col-span-2 flex items-center gap-2">
                     <button
                         @click="applyFilters"
-                        class="flex-1 py-2 px-3 text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white rounded-xl transition-colors text-center"
+                        class="flex-1 py-2 px-3 text-xs font-semibold bg-primary-600 hover:bg-primary-700 text-white rounded-xl transition-colors text-center"
                     >
                         Cari
                     </button>
                     <button
                         @click="resetFilters"
-                        class="py-2 px-3 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-colors"
+                        class="py-2 px-3 text-xs font-semibold bg-surface-100 hover:bg-surface-200 text-surface-700 rounded-xl transition-colors"
                         title="Reset Filter"
                     >
                         Reset
@@ -292,10 +292,10 @@ const submitImport = () => {
             </div>
 
             <!-- Table Card -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+            <div class="bg-white rounded-2xl border border-surface-200 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-50/80 border-b border-slate-200 text-slate-500 uppercase tracking-wider font-semibold">
+                        <thead class="bg-surface-50 border-b border-surface-200 text-surface-600 uppercase tracking-wider font-semibold">
                             <tr>
                                 <th class="px-6 py-3.5">NISN & Nama</th>
                                 <th class="px-6 py-3.5">Jurusan</th>
@@ -305,34 +305,34 @@ const submitImport = () => {
                                 <th class="px-6 py-3.5 text-right">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100">
+                        <tbody class="divide-y divide-surface-100">
                             <tr
                                 v-for="item in alumni.data"
                                 :key="item.id"
-                                class="hover:bg-slate-50/60 transition-colors"
+                                class="hover:bg-surface-50 transition-colors"
                             >
                                 <td class="px-6 py-4">
-                                    <div class="font-bold text-slate-900">{{ item.nama }}</div>
-                                    <div class="text-[11px] text-slate-400">NISN: {{ item.nisn }}</div>
+                                    <div class="font-bold text-surface-900">{{ item.nama }}</div>
+                                    <div class="text-[11px] text-surface-500">NISN: {{ item.nisn }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="font-medium text-slate-800">{{ item.jurusan }}</span>
+                                    <span class="font-medium text-surface-800">{{ item.jurusan }}</span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="px-2 py-0.5 rounded-full bg-slate-100 font-semibold text-slate-700">
+                                    <span class="px-2 py-0.5 rounded-full bg-primary-100 font-semibold text-primary-700">
                                         {{ item.tahun_lulus }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div v-if="item.no_hp" class="flex items-center gap-1.5 text-slate-600">
-                                        <Phone class="w-3 h-3 text-slate-400" />
+                                    <div v-if="item.no_hp" class="flex items-center gap-1.5 text-surface-700">
+                                        <Phone class="w-3 h-3 text-surface-500" />
                                         <span>{{ item.no_hp }}</span>
                                     </div>
-                                    <div v-if="item.email" class="flex items-center gap-1.5 text-slate-400 text-[11px]">
+                                    <div v-if="item.email" class="flex items-center gap-1.5 text-surface-500 text-[11px]">
                                         <Mail class="w-3 h-3" />
                                         <span>{{ item.email }}</span>
                                     </div>
-                                    <span v-if="!item.no_hp && !item.email" class="text-slate-400">-</span>
+                                    <span v-if="!item.no_hp && !item.email" class="text-surface-400">-</span>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span
@@ -352,14 +352,14 @@ const submitImport = () => {
                                     <div class="flex items-center justify-end gap-2">
                                         <button
                                             @click="openEditModal(item)"
-                                            class="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                                            class="p-1.5 text-surface-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors icon-pulse"
                                             title="Edit Alumni"
                                         >
                                             <Edit2 class="w-4 h-4" />
                                         </button>
                                         <button
                                             @click="deleteAlumni(item)"
-                                            class="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                                            class="p-1.5 text-surface-500 hover:text-error hover:bg-rose-50 rounded-lg transition-colors icon-pulse"
                                             title="Hapus Alumni"
                                         >
                                             <Trash2 class="w-4 h-4" />
@@ -368,7 +368,7 @@ const submitImport = () => {
                                 </td>
                             </tr>
                             <tr v-if="alumni.data.length === 0">
-                                <td colspan="6" class="px-6 py-12 text-center text-slate-400">
+                                <td colspan="6" class="px-6 py-12 text-center text-surface-400">
                                     Tidak ada data alumni yang cocok dengan pencarian.
                                 </td>
                             </tr>
@@ -377,8 +377,8 @@ const submitImport = () => {
                 </div>
 
                 <!-- Pagination footer -->
-                <div v-if="alumni.links && alumni.links.length > 3" class="px-6 py-4 border-t border-slate-100 flex items-center justify-between">
-                    <span class="text-xs text-slate-500">
+                <div v-if="alumni.links && alumni.links.length > 3" class="px-6 py-4 border-t border-surface-100 flex items-center justify-between">
+                    <span class="text-xs text-surface-500">
                         Menampilkan {{ alumni.from || 0 }} - {{ alumni.to || 0 }} dari {{ alumni.total }} alumni
                     </span>
                     <div class="flex items-center gap-1">
@@ -391,10 +391,10 @@ const submitImport = () => {
                             :class="[
                                 'px-3 py-1.5 text-xs rounded-lg transition-colors',
                                 link.active
-                                    ? 'bg-indigo-600 text-white font-bold'
+                                    ? 'bg-primary-600 text-white font-bold'
                                     : link.url
-                                    ? 'text-slate-600 hover:bg-slate-100'
-                                    : 'text-slate-300 pointer-events-none'
+                                    ? 'text-surface-700 hover:bg-surface-100'
+                                    : 'text-surface-300 pointer-events-none'
                             ]"
                         />
                     </div>
@@ -405,15 +405,15 @@ const submitImport = () => {
         <!-- Add / Edit Modal -->
         <div
             v-if="isModalOpen"
-            class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+            class="fixed inset-0 z-50 overflow-y-auto bg-surface-900/70 backdrop-blur-sm flex items-center justify-center p-4"
             @click.self="closeModal"
         >
-            <div class="bg-white rounded-2xl max-w-xl w-full shadow-2xl border border-slate-200 overflow-hidden">
-                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                    <h3 class="font-bold text-base text-slate-900">
+            <div class="bg-white rounded-2xl max-w-xl w-full shadow-2xl border border-surface-200 overflow-hidden">
+                <div class="px-6 py-5 border-b border-surface-100 flex items-center justify-between bg-surface-50">
+                    <h3 class="font-bold text-base text-surface-900">
                         {{ editingAlumni ? 'Edit Data Alumni' : 'Tambah Alumni Baru' }}
                     </h3>
-                    <button @click="closeModal" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg">
+                    <button @click="closeModal" class="p-2 text-surface-500 hover:text-surface-700 rounded-lg transition-colors icon-pulse">
                         <X class="w-5 h-5" />
                     </button>
                 </div>
@@ -421,103 +421,103 @@ const submitImport = () => {
                 <form @submit.prevent="submitForm" class="p-6 space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                         <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">NISN (Nomor Induk Siswa Nasional) *</label>
+                            <label class="font-semibold text-surface-700">NISN (Nomor Induk Siswa Nasional) *</label>
                             <input
                                 v-model="form.nisn"
                                 type="text"
                                 required
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
-                            <p v-if="form.errors.nisn" class="text-rose-600 text-[11px]">{{ form.errors.nisn }}</p>
+                            <p v-if="form.errors.nisn" class="text-error text-[11px]">{{ form.errors.nisn }}</p>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Nama Lengkap *</label>
+                            <label class="font-semibold text-surface-700">Nama Lengkap *</label>
                             <input
                                 v-model="form.nama"
                                 type="text"
                                 required
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
-                            <p v-if="form.errors.nama" class="text-rose-600 text-[11px]">{{ form.errors.nama }}</p>
+                            <p v-if="form.errors.nama" class="text-error text-[11px]">{{ form.errors.nama }}</p>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Tanggal Lahir *</label>
+                            <label class="font-semibold text-surface-700">Tanggal Lahir *</label>
                             <input
                                 v-model="form.tanggal_lahir"
                                 type="date"
                                 required
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
-                            <p v-if="form.errors.tanggal_lahir" class="text-rose-600 text-[11px]">{{ form.errors.tanggal_lahir }}</p>
+                            <p v-if="form.errors.tanggal_lahir" class="text-error text-[11px]">{{ form.errors.tanggal_lahir }}</p>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Tahun Lulus (Angkatan) *</label>
+                            <label class="font-semibold text-surface-700">Tahun Lulus (Angkatan) *</label>
                             <input
                                 v-model="form.tahun_lulus"
                                 type="number"
                                 required
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
-                            <p v-if="form.errors.tahun_lulus" class="text-rose-600 text-[11px]">{{ form.errors.tahun_lulus }}</p>
+                            <p v-if="form.errors.tahun_lulus" class="text-error text-[11px]">{{ form.errors.tahun_lulus }}</p>
                         </div>
 
                         <div class="sm:col-span-2 space-y-1">
-                            <label class="font-semibold text-slate-700">Jurusan / Program Keahlian *</label>
+                            <label class="font-semibold text-surface-700">Jurusan / Program Keahlian *</label>
                             <input
                                 v-model="form.jurusan"
                                 type="text"
                                 required
                                 placeholder="Contoh: Teknik Komputer dan Jaringan"
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
-                            <p v-if="form.errors.jurusan" class="text-rose-600 text-[11px]">{{ form.errors.jurusan }}</p>
+                            <p v-if="form.errors.jurusan" class="text-error text-[11px]">{{ form.errors.jurusan }}</p>
                         </div>
 
                         <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">No. WhatsApp / HP</label>
+                            <label class="font-semibold text-surface-700">No. WhatsApp / HP</label>
                             <input
                                 v-model="form.no_hp"
                                 type="text"
                                 placeholder="08xxxxxxxx"
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
                         </div>
 
                         <div class="space-y-1">
-                            <label class="font-semibold text-slate-700">Email</label>
+                            <label class="font-semibold text-surface-700">Email</label>
                             <input
                                 v-model="form.email"
                                 type="email"
                                 placeholder="alumni@email.com"
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             />
                         </div>
 
                         <div class="sm:col-span-2 space-y-1">
-                            <label class="font-semibold text-slate-700">Alamat Tempat Tinggal</label>
+                            <label class="font-semibold text-surface-700">Alamat Tempat Tinggal</label>
                             <textarea
                                 v-model="form.alamat"
                                 rows="2"
-                                class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:outline-none focus:border-indigo-500"
+                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
                             ></textarea>
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+                    <div class="pt-4 border-t border-surface-100 flex items-center justify-end gap-3">
                         <button
                             type="button"
                             @click="closeModal"
-                            class="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors"
+                            class="px-4 py-2 text-xs font-semibold text-surface-700 bg-white border border-surface-300 rounded-xl hover:bg-surface-50 transition-colors"
                         >
                             Batal
                         </button>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-md shadow-indigo-600/30 disabled:opacity-50"
+                            class="px-4 py-2 text-xs font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-all shadow-md disabled:opacity-50 hover-lift"
                         >
                             {{ editingAlumni ? 'Simpan Perubahan' : 'Tambahkan Alumni' }}
                         </button>
@@ -529,37 +529,37 @@ const submitImport = () => {
         <!-- Import Modal -->
         <div
             v-if="isImportModalOpen"
-            class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+            class="fixed inset-0 z-50 overflow-y-auto bg-surface-900/70 backdrop-blur-sm flex items-center justify-center p-4"
             @click.self="closeImportModal"
         >
-            <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden">
-                <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-surface-200 overflow-hidden">
+                <div class="px-6 py-5 border-b border-surface-100 flex items-center justify-between bg-surface-50">
                     <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
-                            <Upload class="w-4 h-4" />
+                        <div class="w-8 h-8 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
+                            <Upload class="w-4 h-4 icon-pulse" />
                         </div>
-                        <h3 class="font-bold text-base text-slate-900">
+                        <h3 class="font-bold text-base text-surface-900">
                             Impor Data Alumni dari Excel
                         </h3>
                     </div>
-                    <button @click="closeImportModal" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg">
+                    <button @click="closeImportModal" class="p-2 text-surface-500 hover:text-surface-700 rounded-lg transition-colors icon-pulse">
                         <X class="w-5 h-5" />
                     </button>
                 </div>
 
                 <form @submit.prevent="submitImport" class="p-6 space-y-5">
                     <!-- Template Download Hint -->
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between text-xs">
+                    <div class="p-4 rounded-xl bg-surface-50 border border-surface-200 flex items-center justify-between text-xs">
                         <div class="flex items-center gap-2.5">
-                            <FileSpreadsheet class="w-5 h-5 text-emerald-600 shrink-0" />
+                            <FileSpreadsheet class="w-5 h-5 text-success shrink-0" />
                             <div>
-                                <p class="font-bold text-slate-800">Format Template Excel</p>
-                                <p class="text-[11px] text-slate-500">Gunakan format kolom yang sudah disesuaikan sistem</p>
+                                <p class="font-bold text-surface-800">Format Template Excel</p>
+                                <p class="text-[11px] text-surface-500">Gunakan format kolom yang sudah disesuaikan sistem</p>
                             </div>
                         </div>
                         <a
                             href="/admin/alumni/template"
-                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-indigo-600 hover:bg-indigo-50 font-semibold text-xs shadow-2xs transition-colors shrink-0"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white border border-surface-200 text-primary-600 hover:bg-primary-50 font-semibold text-xs transition-colors shrink-0 hover-lift"
                         >
                             <Download class="w-3.5 h-3.5" />
                             <span>Unduh Template</span>
@@ -568,12 +568,12 @@ const submitImport = () => {
 
                     <!-- File Drop Area -->
                     <div class="space-y-2">
-                        <label class="block text-xs font-semibold text-slate-700">
+                        <label class="block text-xs font-semibold text-surface-700">
                             Pilih Berkas Excel (.xlsx) atau CSV (.csv) *
                         </label>
                         <div
                             @click="$refs.fileInput.click()"
-                            class="border-2 border-dashed border-slate-200 hover:border-indigo-400 rounded-2xl p-6 text-center cursor-pointer transition-colors bg-slate-50/50 hover:bg-indigo-50/30 group"
+                            class="border-2 border-dashed border-surface-200 hover:border-primary-400 rounded-2xl p-6 text-center cursor-pointer transition-colors bg-surface-50 hover:bg-primary-50/30 group"
                         >
                             <input
                                 ref="fileInput"
@@ -582,30 +582,30 @@ const submitImport = () => {
                                 class="hidden"
                                 @change="handleFileSelect"
                             />
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition-transform">
                                 <FileUp class="w-6 h-6" />
                             </div>
-                            <div v-if="selectedFileName" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-lg inline-block">
+                            <div v-if="selectedFileName" class="text-xs font-bold text-primary-600 bg-primary-50 px-3 py-1.5 rounded-lg inline-block">
                                 {{ selectedFileName }}
                             </div>
                             <div v-else>
-                                <p class="text-xs font-bold text-slate-800">Klik untuk memilih berkas dari komputer</p>
-                                <p class="text-[11px] text-slate-400 mt-1">Mendukung format .xlsx dan .csv hingga 10MB</p>
+                                <p class="text-xs font-bold text-surface-800">Klik untuk memilih berkas dari komputer</p>
+                                <p class="text-[11px] text-surface-500 mt-1">Mendukung format .xlsx dan .csv hingga 10MB</p>
                             </div>
                         </div>
-                        <p v-if="importForm.errors.file" class="text-rose-600 text-[11px] font-medium flex items-center gap-1 mt-1">
+                        <p v-if="importForm.errors.file" class="text-error text-[11px] font-medium flex items-center gap-1 mt-1">
                             <AlertCircle class="w-3.5 h-3.5 shrink-0" />
                             <span>{{ importForm.errors.file }}</span>
                         </p>
                     </div>
 
                     <!-- Rules / Instructions -->
-                    <div class="text-[11px] text-slate-500 space-y-1 bg-slate-50 p-3.5 rounded-xl border border-slate-200/60">
-                        <p class="font-bold text-slate-700 flex items-center gap-1.5">
-                            <Info class="w-3.5 h-3.5 text-indigo-600" />
+                    <div class="text-[11px] text-surface-600 space-y-1 bg-surface-50 p-3.5 rounded-xl border border-surface-200">
+                        <p class="font-bold text-surface-700 flex items-center gap-1.5">
+                            <Info class="w-3.5 h-3.5 text-primary-600" />
                             <span>Petunjuk Pengisian:</span>
                         </p>
-                        <ul class="list-disc list-inside space-y-0.5 text-slate-600 pl-1">
+                        <ul class="list-disc list-inside space-y-0.5 text-surface-600 pl-1">
                             <li>Baris pertama adalah judul kolom (header) dan akan dilewati otomatis.</li>
                             <li>Kolom Wajib: <strong>NISN, Nama Lengkap, Tanggal Lahir (YYYY-MM-DD), Jurusan, Tahun Lulus</strong>.</li>
                             <li>Jika NISN alumni sudah terdaftar di database, data alumni tersebut akan diperbarui otomatis (*update*).</li>
@@ -613,18 +613,18 @@ const submitImport = () => {
                     </div>
 
                     <!-- Modal Actions -->
-                    <div class="pt-2 flex items-center justify-end gap-3 border-t border-slate-100">
+                    <div class="pt-2 flex items-center justify-end gap-3 border-t border-surface-100">
                         <button
                             type="button"
                             @click="closeImportModal"
-                            class="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors"
+                            class="px-4 py-2 text-xs font-semibold text-surface-700 bg-white border border-surface-300 rounded-xl hover:bg-surface-50 transition-colors"
                         >
                             Batal
                         </button>
                         <button
                             type="submit"
                             :disabled="importForm.processing || !importForm.file"
-                            class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-md shadow-indigo-600/30 disabled:opacity-50"
+                            class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-all shadow-md disabled:opacity-50 hover-lift"
                         >
                             <Upload class="w-3.5 h-3.5" />
                             <span>{{ importForm.processing ? 'Mengimpor Data...' : 'Mulai Impor' }}</span>

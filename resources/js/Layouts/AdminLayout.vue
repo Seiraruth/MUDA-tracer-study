@@ -17,7 +17,9 @@ import {
     UserCircle,
     ChevronDown,
     Building2,
-    BarChart3
+    BarChart3,
+    MessageSquare,
+    Handshake
 } from 'lucide-vue-next';
 
 defineProps({
@@ -63,6 +65,20 @@ const navigation = [
         routePattern: '/admin/job-postings',
         icon: Briefcase,
         badge: null
+    },
+    {
+        name: 'Mitra DUDI',
+        href: '/admin/mitras',
+        routePattern: '/admin/mitras',
+        icon: Handshake,
+        badge: null
+    },
+    {
+        name: 'Saran Alumni',
+        href: '/admin/saran',
+        routePattern: '/admin/saran',
+        icon: MessageSquare,
+        badge: null
     }
 ];
 
@@ -76,116 +92,108 @@ const isCurrentRoute = (item) => {
 </script>
 
 <template>
-    <div class="min-h-screen bg-slate-50 font-sans flex text-slate-800">
+    <div class="min-h-screen bg-surface-100 font-sans text-surface-900 flex">
         <!-- Mobile Sidebar Backdrop -->
         <div
             v-if="sidebarOpen"
             @click="sidebarOpen = false"
-            class="fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-xs lg:hidden transition-opacity"
+            class="fixed inset-0 z-40 bg-surface-900/70 lg:hidden"
         ></div>
 
-        <!-- Sidebar Navigation -->
+        <!-- Sidebar -->
         <aside
             :class="[
-                'fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 text-slate-200 flex flex-col transition-transform duration-300 ease-in-out lg:static lg:translate-x-0',
-                sidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+                'sticky top-0 h-screen lg:h-dvh left-0 z-50 w-64 bg-primary-900 text-white flex flex-col transition-transform duration-200',
+                sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
             ]"
         >
-            <!-- Sidebar Header / Logo -->
-            <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800/80 bg-slate-950/40">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
-                        <GraduationCap class="w-5 h-5" />
+            <!-- Logo -->
+            <div class="h-16 flex items-center justify-between px-4 border-b border-primary-800">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                        <GraduationCap class="w-4 h-4 text-primary-300" />
                     </div>
-                    <div>
-                        <div class="font-bold text-base text-white tracking-tight flex items-center gap-1.5">
-                            BKK Tracer Study
-                        </div>
-                        <p class="text-xs text-slate-400 font-medium">SMK Pusat Keunggulan</p>
+                    <div class="space-y-0">
+                        <div class="text-sm font-semibold">Tracer Study</div>
+                        <div class="text-[10px] text-primary-300">BKK Admin</div>
                     </div>
                 </div>
                 <button
                     @click="sidebarOpen = false"
-                    class="lg:hidden p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+                    class="lg:hidden p-1.5 text-primary-200 hover:text-white hover:bg-white/10 rounded-md transition-colors"
                 >
-                    <X class="w-5 h-5" />
+                    <X class="w-4 h-4" />
                 </button>
             </div>
 
-            <!-- Quick Badge / System Status -->
-            <div class="px-6 py-4">
-                <div class="bg-slate-800/60 rounded-xl p-3 border border-slate-700/50 flex items-center gap-3">
-                    <span class="relative flex h-2.5 w-2.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                    </span>
-                    <div class="text-xs">
-                        <p class="text-slate-300 font-semibold">Tahun Aktif Tracer {{ new Date().getFullYear() }}</p>
-                        <p class="text-slate-400 text-[11px]">Database Terhubung & Sinkron</p>
+            <!-- System Status -->
+            <div class="p-3">
+                <div class="bg-primary-800/50 rounded-lg p-2.5 border border-primary-700/50 flex items-center gap-2.5">
+                    <div class="relative">
+                        <div class="w-2 h-2 rounded-full bg-success"></div>
+                    </div>
+                    <div class="space-y-0">
+                        <p class="text-xs font-medium text-primary-100">Tahun {{ new Date().getFullYear() }}</p>
+                        <p class="text-[10px] text-primary-400">Sistem online</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Nav Links -->
-            <div class="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto">
-                <div class="px-3 pb-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                    Menu Utama
+            <!-- Navigation -->
+            <div class="flex-1 px-3 py-2 overflow-y-auto">
+                <div class="px-2 pb-2 mb-2 border-b border-primary-800">
+                    <div class="text-[10px] font-semibold text-primary-400 uppercase tracking-wide px-1">
+                        Menu
+                    </div>
                 </div>
-                <Link
-                    v-for="item in navigation"
-                    :key="item.name"
-                    :href="item.href"
-                    :class="[
-                        'group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
-                        isCurrentRoute(item)
-                            ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                            : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
-                    ]"
-                >
-                    <div class="flex items-center gap-3">
+                <nav class="space-y-0.5">
+                    <Link
+                        v-for="item in navigation"
+                        :key="item.name"
+                        :href="item.href"
+                        :class="[
+                            'group flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150',
+                            isCurrentRoute(item)
+                                ? 'bg-white text-primary-900'
+                                : 'text-primary-100 hover:bg-white/10 hover:text-white'
+                        ]"
+                    >
                         <component
                             :is="item.icon"
                             :class="[
-                                'w-5 h-5 transition-transform duration-200 group-hover:scale-105',
-                                isCurrentRoute(item) ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'
+                                'w-4 h-4',
+                                isCurrentRoute(item) ? 'text-primary-600' : 'text-primary-300 group-hover:text-white'
                             ]"
                         />
                         <span>{{ item.name }}</span>
-                    </div>
-                    <span
-                        v-if="item.badge"
-                        class="px-2 py-0.5 text-xs font-semibold rounded-full bg-slate-800 text-indigo-300 border border-indigo-400/20"
-                    >
-                        {{ item.badge }}
-                    </span>
-                </Link>
+                    </Link>
+                </nav>
 
-                <div class="pt-6 px-3 pb-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-                    Tautan Eksternal
+                <div class="pt-4 px-2 pb-2 mt-4 border-t border-primary-800">
+                    <div class="text-[10px] font-semibold text-primary-400 uppercase tracking-wide px-1">
+                        Tautan
+                    </div>
                 </div>
                 <a
                     href="/"
                     target="_blank"
-                    class="group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800/80 hover:text-white transition-all duration-200"
+                    class="group flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-primary-100 hover:bg-white/10 hover:text-white transition-all duration-150"
                 >
-                    <div class="flex items-center gap-3">
-                        <ExternalLink class="w-5 h-5 text-slate-400 group-hover:text-slate-200" />
-                        <span>Portal Web Publik</span>
-                    </div>
-                    <span class="text-[11px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Baru</span>
+                    <ExternalLink class="w-4 h-4 text-primary-300 group-hover:text-white" />
+                    <span>Situs Publik</span>
                 </a>
             </div>
 
-            <!-- Sidebar Footer / User Profile -->
-            <div class="p-4 border-t border-slate-800/80 bg-slate-950/30">
-                <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/40">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                        <div class="w-9 h-9 rounded-lg bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 font-bold flex items-center justify-center shrink-0">
+            <!-- User Profile -->
+            <div class="p-3 border-t border-primary-800">
+                <div class="flex items-center justify-between p-2 rounded-lg bg-primary-800/50 border border-primary-700/50">
+                    <div class="flex items-center gap-2.5 overflow-hidden">
+                        <div class="w-7 h-7 rounded-md bg-primary-600 text-white font-medium flex items-center justify-center text-sm shrink-0">
                             {{ user.name ? user.name.charAt(0).toUpperCase() : 'A' }}
                         </div>
-                        <div class="truncate">
+                        <div class="truncate min-w-0">
                             <p class="text-xs font-semibold text-white truncate">{{ user.name }}</p>
-                            <p class="text-[11px] text-slate-400 truncate">{{ user.email }}</p>
+                            <p class="text-[10px] text-primary-300 truncate">{{ user.email }}</p>
                         </div>
                     </div>
                     <Link
@@ -193,100 +201,85 @@ const isCurrentRoute = (item) => {
                         method="post"
                         as="button"
                         title="Keluar"
-                        class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-700/50 transition-colors"
+                        class="p-1.5 rounded-md text-primary-300 hover:text-white hover:bg-white/10 transition-colors"
                     >
-                        <LogOut class="w-4 h-4" />
+                        <LogOut class="w-3.5 h-3.5" />
                     </Link>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
-            <!-- Top Bar -->
-            <header class="h-20 bg-white border-b border-slate-200/80 flex items-center justify-between px-4 sm:px-8 z-30 sticky top-0 shadow-xs">
-                <div class="flex items-center gap-4">
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-surface-200 flex items-center justify-between px-4 sm:px-6 z-30 sticky top-0">
+                <div class="flex items-center gap-3">
                     <button
                         @click="sidebarOpen = true"
-                        class="lg:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
+                        class="lg:hidden p-1.5 text-surface-600 hover:text-surface-900 hover:bg-surface-100 rounded-md transition-colors"
                     >
-                        <Menu class="w-6 h-6" />
+                        <Menu class="w-5 h-5" />
                     </button>
                     <div>
-                        <h1 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                            <span>{{ title }}</span>
+                        <h1 class="text-lg font-semibold text-surface-900">
+                            {{ title }}
                         </h1>
-                        <p class="text-xs text-slate-500 hidden sm:block">Panel Administrasi & Pengolahan Data Tracer Study</p>
+                        <p class="text-xs text-surface-500 hidden sm:block">Panel pengelolaan data</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <!-- Link to Public Website -->
+                <div class="flex items-center gap-2">
                     <a
                         href="/"
                         target="_blank"
-                        class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors border border-slate-200"
+                        class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-surface-600 hover:text-surface-900 hover:bg-surface-100 rounded-lg transition-colors"
                     >
-                        <ExternalLink class="w-3.5 h-3.5 text-slate-500" />
-                        <span>Kunjungi Situs Publik</span>
+                        <ExternalLink class="w-3.5 h-3.5" />
+                        <span>Buka Situs</span>
                     </a>
 
-                    <!-- Admin Profile Dropdown Button -->
+                    <!-- User Menu -->
                     <div class="relative">
                         <button
                             @click="userDropdownOpen = !userDropdownOpen"
-                            class="flex items-center gap-2.5 p-1.5 sm:px-3 sm:py-2 rounded-xl text-slate-700 hover:bg-slate-100 border border-slate-200/70 transition-all text-xs font-medium"
+                            class="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-surface-700 hover:bg-surface-100 border border-transparent hover:border-surface-200 transition-all text-xs font-medium"
                         >
-                            <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-bold flex items-center justify-center text-xs">
+                            <div class="w-6 h-6 rounded-md bg-primary-600 text-white font-medium flex items-center justify-center text-xs">
                                 {{ user.name ? user.name.charAt(0).toUpperCase() : 'A' }}
                             </div>
-                            <span class="hidden md:inline font-semibold text-slate-800">{{ user.name }}</span>
-                            <ChevronDown class="w-3.5 h-3.5 text-slate-400" />
+                            <span class="hidden md:inline font-medium text-surface-800">{{ user.name }}</span>
+                            <ChevronDown class="w-3.5 h-3.5 text-surface-400" />
                         </button>
 
-                        <!-- Dropdown Menu -->
+                        <!-- Dropdown -->
                         <div
                             v-if="userDropdownOpen"
                             @click="userDropdownOpen = false"
-                            class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-200/80 py-2 z-50 animate-in fade-in zoom-in-95 duration-150"
+                            class="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-surface-200 py-1.5 z-50"
                         >
-                            <div class="px-4 py-2 border-b border-slate-100">
-                                <p class="text-xs text-slate-400 font-medium">Masuk Sebagai</p>
-                                <p class="text-sm font-bold text-slate-900 truncate">{{ user.name }}</p>
-                                <p class="text-xs text-slate-500 truncate">{{ user.email }}</p>
+                            <div class="px-3 py-2 border-b border-surface-100">
+                                <p class="text-[10px] text-surface-400 font-medium uppercase tracking-wide">Masuk sebagai</p>
+                                <p class="text-sm font-semibold text-surface-900 truncate">{{ user.name }}</p>
+                                <p class="text-xs text-surface-500 truncate">{{ user.email }}</p>
                             </div>
-                            <div class="p-1">
-                                <a
-                                    href="/admin/alumni"
-                                    class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
-                                >
-                                    <Users class="w-4 h-4 text-slate-400" />
-                                    <span>Kelola Data Alumni</span>
+                            <div class="py-1">
+                                <a href="/admin/alumni" class="flex items-center gap-2 px-3 py-1.5 text-xs text-surface-700 hover:bg-surface-50 rounded-md transition-colors">
+                                    <Users class="w-3.5 h-3.5 text-surface-400" />
+                                    <span>Kelola Alumni</span>
                                 </a>
-                                <a
-                                    href="/admin/tracer-responses"
-                                    class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
-                                >
-                                    <FileSpreadsheet class="w-4 h-4 text-slate-400" />
-                                    <span>Hasil Tracer Study</span>
+                                <a href="/admin/tracer-responses" class="flex items-center gap-2 px-3 py-1.5 text-xs text-surface-700 hover:bg-surface-50 rounded-md transition-colors">
+                                    <FileSpreadsheet class="w-3.5 h-3.5 text-surface-400" />
+                                    <span>Hasil Tracer</span>
                                 </a>
-                                <a
-                                    href="/admin/job-postings"
-                                    class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
-                                >
-                                    <Briefcase class="w-4 h-4 text-slate-400" />
-                                    <span>Lowongan Kerja BKK</span>
+                                <a href="/admin/job-postings" class="flex items-center gap-2 px-3 py-1.5 text-xs text-surface-700 hover:bg-surface-50 rounded-md transition-colors">
+                                    <Briefcase class="w-3.5 h-3.5 text-surface-400" />
+                                    <span>Lowongan Kerja</span>
                                 </a>
                             </div>
-                            <div class="border-t border-slate-100 p-1">
-                                <Link
-                                    href="/admin/logout"
-                                    method="post"
-                                    as="button"
-                                    class="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-lg transition-colors font-medium text-left"
-                                >
-                                    <LogOut class="w-4 h-4 text-rose-500" />
-                                    <span>Keluar dari Akun</span>
+                            <div class="border-t border-surface-100 py-1">
+                                <Link href="/admin/logout" method="post" as="button" class="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-error hover:bg-red-50 rounded-md transition-colors font-medium text-left">
+                                    <LogOut class="w-3.5 h-3.5" />
+                                    <span>Keluar</span>
                                 </Link>
                             </div>
                         </div>
@@ -294,26 +287,22 @@ const isCurrentRoute = (item) => {
                 </div>
             </header>
 
-            <!-- Flash Alert Messages -->
-            <div v-if="flash.success" class="px-6 sm:px-8 pt-6">
-                <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center justify-between shadow-xs">
-                    <div class="flex items-center gap-3">
-                        <CheckCircle class="w-5 h-5 text-emerald-600 shrink-0" />
-                        <span>{{ flash.success }}</span>
-                    </div>
+            <!-- Flash Messages -->
+            <div v-if="flash.success" class="px-4 sm:px-6 pt-4">
+                <div class="p-3 rounded-lg bg-success-light border border-success/20 text-success text-sm flex items-center gap-2.5">
+                    <CheckCircle class="w-4 h-4 shrink-0" />
+                    <span>{{ flash.success }}</span>
                 </div>
             </div>
-            <div v-if="flash.error" class="px-6 sm:px-8 pt-6">
-                <div class="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm flex items-center justify-between shadow-xs">
-                    <div class="flex items-center gap-3">
-                        <AlertCircle class="w-5 h-5 text-rose-600 shrink-0" />
-                        <span>{{ flash.error }}</span>
-                    </div>
+            <div v-if="flash.error" class="px-4 sm:px-6 pt-4">
+                <div class="p-3 rounded-lg bg-error-light border border-error/20 text-error text-sm flex items-center gap-2.5">
+                    <AlertCircle class="w-4 h-4 shrink-0" />
+                    <span>{{ flash.error }}</span>
                 </div>
             </div>
 
-            <!-- Page Body Slot -->
-            <main class="flex-1 overflow-y-auto p-4 sm:p-8">
+            <!-- Main Content -->
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6">
                 <slot />
             </main>
         </div>

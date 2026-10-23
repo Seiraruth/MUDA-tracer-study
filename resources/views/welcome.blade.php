@@ -113,5 +113,36 @@
         </div>
     </section>
     @endif
+
+    <!-- Mitra DUDI -->
+    @if($mitras->count() > 0)
+    <section aria-label="Mitra DUDI" class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8">
+        <div class="flex items-center justify-between gap-4 mb-6 md:mb-7">
+            <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center text-lg shrink-0">
+                    <i class="fa-solid fa-handshake"></i>
+                </span>
+                <h3 class="font-display text-lg font-bold text-slate-900">Mitra DUDI</h3>
+            </div>
+            <span class="text-sm text-slate-500">Terakhir diperbarui: {{ now()->format('d M Y') }}</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            @foreach($mitras as $mitra)
+                <article class="bg-slate-50 border border-slate-200 rounded-xl p-4 transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-md">
+                    <h4 class="font-display text-base font-bold text-slate-900 mb-1">{{ $mitra->nama_perusahaan }}</h4>
+                    @if($mitra->bidang_usaha)
+                        <p class="text-sm text-slate-600 mb-2">{{ $mitra->bidang_usaha }}</p>
+                    @endif
+                    @if($mitra->kota)
+                        <p class="text-xs text-slate-500 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-xs"></i> {{ $mitra->kota }}
+                        </p>
+                    @endif
+                </article>
+            @endforeach
+        </div>
+    </section>
+    @endif
 </div>
 @endsection
