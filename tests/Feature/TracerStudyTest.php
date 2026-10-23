@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use App\Models\Alumni;
 use App\Models\JobPosting;
+use App\Models\Mitra;
 use App\Models\TracerResponse;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -76,6 +78,125 @@ class TracerStudyTest extends TestCase
             'nama_perusahaan' => 'PT Software Utama',
             'linear_dengan_jurusan' => true,
         ]);
+    }
+
+    public function test_public_statistics_can_be_filtered_by_graduation_year(): void
+    {
+        $alumni2023 = Alumni::create([
+            'nisn' => '0010000001',
+            'nama' => 'Alumni 2023',
+            'tanggal_lahir' => '2005-01-01',
+            'jurusan' => 'Rekayasa Perangkat Lunak',
+            'tahun_lulus' => 2023,
+        ]);
+        $alumni2024 = Alumni::create([
+            'nisn' => '0010000002',
+            'nama' => 'Alumni 2024',
+            'tanggal_lahir' => '2006-01-01',
+            'jurusan' => 'Teknik Komputer dan Jaringan',
+            'tahun_lulus' => 2024,
+        ]);
+
+        TracerResponse::create([
+            'alumni_id' => $alumni2023->id,
+            'tahun_tracer' => 2026,
+            'status_utama' => 'Bekerja',
+            'kisaran_gaji' => '3.5 - 5 Juta',
+        ]);
+        TracerResponse::create([
+            'alumni_id' => $alumni2024->id,
+            'tahun_tracer' => 2026,
+            'status_utama' => 'Kuliah',
+        ]);
+
+        $response = $this->get('/statistik?tahun_lulus=2023');
+
+        $response->assertOk()
+            ->assertSee('tahun_lulus')
+            ->assertSee('Lulusan 2023')
+            ->assertSee('3.5 - 5 Juta');
+        $response->assertViewHas('totalAlumni', 1);
+        $response->assertViewHas('totalResponses', 1);
+        $response->assertViewHas('bekerja', 1);
+        $response->assertViewHas('kuliah', 0);
+        $response->assertViewHas('statistikRows', function ($rows) {
+            return $rows->count() === 1 && (int) $rows->first()->tahun_lulus === 2023;
+        });
+    }
+
+    public function test_admin_dashboard_shows_alumni_without_current_year_response(): void
+    {
+        $admin = User::factory()->create();
+        $pending = Alumni::create([
+            'nisn' => '0020000001',
+            'nama' => 'Alumni Perlu Diingatkan',
+            'tanggal_lahir' => '2005-02-02',
+            'jurusan' => 'Rekayasa Perangkat Lunak',
+            'tahun_lulus' => 2023,
+        ]);
+        $responded = Alumni::create([
+            'nisn' => '0020000002',
+            'nama' => 'Alumni Sudah Mengisi',
+            'tanggal_lahir' => '2005-03-03',
+            'jurusan' => 'Teknik Komputer dan Jaringan',
+            'tahun_lulus' => 2023,
+        ]);
+        TracerResponse::create([
+            'alumni_id' => $responded->id,
+            'tahun_tracer' => (int) date('Y'),
+            'status_utama' => 'Kuliah',
+        ]);
+
+        $response = $this->actingAs($admin)->get('/admin');
+
+        $response->assertOk()
+            ->assertInertia(fn ($page) => $page
+                ->component('Admin/Dashboard')
+                ->where('belumIsi.0.id', $pending->id)
+                ->missing('belumIsi.1.id'));
+    }
+
+    public function test_admin_can_create_and_filter_mitra_dudi(): void
+    {
+        $admin = User::factory()->create();
+        $this->actingAs($admin)->post('/admin/mitras', [
+            'nama_perusahaan' => 'PT Mitra Uji',
+            'bidang_usaha' => 'Manufaktur',
+            'kota' => 'Cikampek',
+            'is_active' => true,
+        ])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('mitras', ['nama_perusahaan' => 'PT Mitra Uji']);
+        $this->get('/admin/mitras?search=PT%20Mitra%20Uji')
+            ->assertOk()
+            ->assertInertia(fn ($page) => $page
+                ->component('Admin/Mitra/Index')
+                ->where('mitras.data.0.nama_perusahaan', 'PT Mitra Uji'));
+    }
+
+    public function test_admin_can_review_alumni_suggestions(): void
+    {
+        $admin = User::factory()->create();
+        $alumni = Alumni::create([
+            'nisn' => '0030000001',
+            'nama' => 'Alumni Pemberi Saran',
+            'tanggal_lahir' => '2005-04-04',
+            'jurusan' => 'Akuntansi dan Keuangan',
+            'tahun_lulus' => 2023,
+        ]);
+        TracerResponse::create([
+            'alumni_id' => $alumni->id,
+            'tahun_tracer' => (int) date('Y'),
+            'status_utama' => 'Bekerja',
+            'saran_sekolah' => 'Tambahkan praktik industri.',
+        ]);
+
+        $this->actingAs($admin)->get('/admin/saran')
+            ->assertOk()
+            ->assertInertia(fn ($page) => $page
+                ->component('Admin/Saran/Index')
+                ->where('sarans.data.0.alumni.nama', 'Alumni Pemberi Saran')
+                ->where('sarans.data.0.saran_sekolah', 'Tambahkan praktik industri.'));
     }
 
     public function test_loker_page_loads(): void

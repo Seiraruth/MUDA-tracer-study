@@ -19,7 +19,8 @@ import {
     Sparkles,
     Calendar,
     ArrowUpRight,
-    TrendingUp
+    TrendingUp,
+    ClipboardCheck
 } from 'lucide-vue-next';
 
 const props = defineProps({
@@ -83,68 +84,62 @@ const closeResponseModal = () => {
     <Head title="Dashboard Admin Tracer Study" />
 
     <AdminLayout title="Ringkasan">
-        <div class="space-y-5 max-w-7xl mx-auto">
-            <!-- Welcome Header -->
-            <div class="relative overflow-hidden rounded-xl bg-primary-900 p-5 sm:p-6 text-white border border-primary-800 animate-in">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary-800/50 to-transparent pointer-events-none"></div>
-                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/10 text-primary-200 border border-white/10 text-xs font-medium">
-                            <Sparkles class="w-3 h-3" />
-                            <span>Portal Penelusuran Tamatan</span>
-                        </div>
-                        <h2 class="text-xl sm:text-2xl font-bold text-white">
-                            Dashboard Tracer Study & BKK
+        <div class="space-y-7 max-w-7xl mx-auto">
+            <!-- Header identifies the school's tracer-study work; the yellow accent marks the primary action. -->
+            <div class="relative overflow-hidden rounded-2xl bg-primary-900 p-6 sm:p-8 text-white border border-primary-800">
+                <div class="absolute right-0 top-0 h-full w-1.5 bg-cta" aria-hidden="true"></div>
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+                    <div class="space-y-3 max-w-2xl">
+                        <p class="text-sm font-semibold text-primary-200">SMK Muhammadiyah 2 Cikampek · BKK</p>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white">
+                            Pantau perjalanan lulusan
                         </h2>
-                        <p class="text-sm text-primary-200 max-w-xl">
-                            Pantau keberhasilan lulusan: indikator BMW, keselarasan kompetensi, dan bursa kerja.
+                        <p class="text-sm text-primary-100 leading-relaxed">
+                            Lihat partisipasi tracer, hasil BMW, dan alumni yang perlu ditindaklanjuti.
                         </p>
                     </div>
 
-                    <!-- Quick Actions -->
-                    <div class="flex items-center gap-2 shrink-0">
+                    <div class="flex flex-wrap items-center gap-2 shrink-0">
                         <Link
                             href="/admin/alumni"
-                            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white text-primary-900 hover:bg-primary-50 text-xs font-semibold transition-colors icon-pulse"
+                            class="inline-flex min-h-11 items-center gap-2 px-4 py-2 rounded-lg bg-cta text-surface-900 hover:bg-cta-600 hover:text-white text-sm font-bold transition-colors"
                         >
-                            <Plus class="w-3.5 h-3.5" />
-                            <span>Tambah Alumni</span>
+                            <Plus class="w-4 h-4" />
+                            <span>Kelola Data Alumni</span>
                         </Link>
                         <Link
                             href="/admin/job-postings"
-                            class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-medium transition-colors"
+                            class="inline-flex min-h-11 items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/25 text-sm font-semibold transition-colors"
                         >
-                            <Briefcase class="w-3.5 h-3.5" />
-                            <span>Posting Loker</span>
+                            <Briefcase class="w-4 h-4" />
+                            <span>Kelola Lowongan</span>
                         </Link>
                     </div>
                 </div>
 
                 <!-- Stats Row -->
-                <div class="mt-4 pt-4 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="mt-7 pt-5 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-x-5 gap-y-4">
                     <div>
-                        <span class="text-primary-300 block text-[10px]">Response Rate</span>
-                        <span class="text-lg font-bold text-white">{{ stats.responseRate }}%</span>
+                        <span class="text-primary-200 block text-xs">Tingkat respons</span>
+                        <span class="text-2xl font-bold text-white tabular-nums">{{ stats.responseRate }}%</span>
                     </div>
                     <div>
-                        <span class="text-primary-300 block text-[10px]">Total Responden</span>
-                        <span class="text-lg font-bold text-success-light">{{ stats.totalResponses }}</span>
+                        <span class="text-primary-200 block text-xs">Jawaban tersimpan</span>
+                        <span class="text-2xl font-bold text-white tabular-nums">{{ stats.totalResponses }}</span>
                     </div>
                     <div>
-                        <span class="text-primary-300 block text-[10px]">Belum Mengisi</span>
-                        <span class="text-lg font-bold text-warning-light">
-                            {{ Math.max(0, stats.totalAlumni - stats.totalResponses) }}
-                        </span>
+                        <span class="text-primary-200 block text-xs">Belum mengisi tahun ini</span>
+                        <span class="text-2xl font-bold text-cta tabular-nums">{{ belumIsi.length }}</span>
                     </div>
                     <div>
-                        <span class="text-primary-300 block text-[10px]">Tahun Aktif</span>
-                        <span class="text-lg font-bold text-white">{{ new Date().getFullYear() }}</span>
+                        <span class="text-primary-200 block text-xs">Tahun tracer aktif</span>
+                        <span class="text-2xl font-bold text-white tabular-nums">{{ new Date().getFullYear() }}</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 stagger-children">
+            <!-- BMW counts are secondary to the response follow-up workflow above. -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 <StatCard
                     title="Total Alumni"
                     :value="stats.totalAlumni"
@@ -249,39 +244,47 @@ const closeResponseModal = () => {
                 </div>
             </div>
 
-            <!-- Alumni Belum Isi Tracer -->
-            <div v-if="belumIsi && belumIsi.length > 0" class="bg-white rounded-xl p-5 border border-surface-200 animate-in animate-in-delay-4">
-                <div class="flex items-center justify-between pb-3 mb-4 border-b border-surface-100">
-                    <div>
-                        <h3 class="font-semibold text-surface-900 text-sm">
-                            Alumni Belum Mengisi Tracer Study
-                        </h3>
-                        <p class="text-xs text-surface-500">Perlu pengingat/follow-up</p>
+            <!-- Follow-up list is prominent because it directly supports the admin's next action. -->
+            <section class="bg-white rounded-2xl border border-surface-200 overflow-hidden" aria-labelledby="pending-tracer-heading">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 border-b border-surface-200">
+                    <div class="flex items-start gap-3">
+                        <span class="w-10 h-10 rounded-lg bg-cta/25 text-primary-900 flex items-center justify-center shrink-0" aria-hidden="true">
+                            <ClipboardCheck class="w-5 h-5" />
+                        </span>
+                        <div>
+                            <h3 id="pending-tracer-heading" class="font-bold text-surface-900 text-base">Tindak lanjut tracer tahun ini</h3>
+                            <p class="text-sm text-surface-600">Alumni tanpa jawaban untuk periode {{ new Date().getFullYear() }}.</p>
+                        </div>
                     </div>
-                    <span class="text-[10px] font-semibold px-2 py-1 rounded bg-amber-100 text-amber-700">
-                        {{ belumIsi.length }} belum isi
+                    <span v-if="belumIsi.length" class="self-start sm:self-auto px-3 py-1.5 rounded-md bg-cta/30 text-surface-900 text-sm font-bold tabular-nums">
+                        {{ belumIsi.length }} perlu dihubungi
                     </span>
                 </div>
 
-                <div class="space-y-2">
+                <div v-if="belumIsi.length" class="divide-y divide-surface-100">
                     <div
                         v-for="alumni in belumIsi"
                         :key="alumni.id"
-                        class="flex items-center justify-between p-2.5 rounded-lg bg-surface-50 hover:bg-amber-50/50 transition-colors"
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 hover:bg-surface-50 transition-colors"
                     >
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-semibold text-xs">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-lg bg-primary-100 text-primary-900 flex items-center justify-center font-bold text-sm shrink-0" aria-hidden="true">
                                 {{ alumni.nama.charAt(0) }}
                             </div>
-                            <div>
-                                <span class="text-xs font-medium text-surface-900">{{ alumni.nama }}</span>
-                                <p class="text-[10px] text-surface-500">{{ alumni.jurusan }} • Thn Lulus {{ alumni.tahun_lulus }}</p>
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold text-surface-900 truncate">{{ alumni.nama }}</p>
+                                <p class="text-xs text-surface-600 truncate">{{ alumni.jurusan }} · Lulusan {{ alumni.tahun_lulus }}</p>
                             </div>
                         </div>
-                        <span class="text-[10px] text-amber-600 font-medium">Belum isi</span>
+                        <span class="inline-flex min-h-11 items-center text-xs font-semibold text-surface-700">
+                            Belum mengisi
+                        </span>
                     </div>
                 </div>
-            </div>
+                <p v-else class="px-5 py-8 text-sm text-surface-700" role="status">
+                    Tidak ada alumni yang perlu ditindaklanjuti untuk tahun ini.
+                </p>
+            </section>
         </div>
 
         <!-- Detail Modal -->

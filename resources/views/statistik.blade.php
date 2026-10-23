@@ -41,7 +41,7 @@
 
     $careerPanels = [
         ['icon' => 'fa-briefcase',      'title' => 'Alumni Bekerja',     'count' => $bekerja,    'desc' => 'Perusahaan, jabatan, kisaran gaji, kesesuaian pekerjaan dengan jurusan.'],
-        ['icon' => 'fa-graduation-cap', 'title' => 'Melanjutkan Kuliah', 'count' => $kuliah,     'desc' => 'Kampus atau institusi pendidikan lanjutan dan program studi yang tertilih.'],
+        ['icon' => 'fa-graduation-cap', 'title' => 'Melanjutkan Kuliah', 'count' => $kuliah,     'desc' => 'Kampus atau institusi pendidikan lanjutan dan program studi yang dipilih.'],
         ['icon' => 'fa-store',          'title' => 'Alumni Wirausaha',   'count' => $wirausaha,  'desc' => 'Nama usaha, bidang usaha, dan omset bulanan rata-rata.'],
     ];
 @endphp
@@ -73,22 +73,25 @@
                 </span>
                 <span class="flex flex-col leading-tight">
                     <span class="font-display text-sm font-bold text-slate-900">Tahun Lulusan</span>
-                    <span class="text-xs text-slate-500">Kesebaran alumni berdasarkan tahun lulusan</span>
+                    <span class="text-xs text-slate-500">Sebaran alumni berdasarkan tahun lulusan</span>
                 </span>
             </label>
 
-            <select id="filter-tahun-lulus" name="tahun_lulus" aria-label="Tahun Lulusan"
-                class="w-full sm:w-56 rounded-lg bg-white border border-slate-300 text-slate-900 text-sm font-semibold px-4 py-2.5 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand-200">
-                <option value="">Semua Tahun Lulusan</option>
-                @foreach($tahunLulusOptions as $year)
-                    <option value="{{ $year }}">Lulusan {{ $year }}</option>
-                @endforeach
-            </select>
+            <form method="GET" action="{{ route('statistik') }}" class="w-full sm:w-auto">
+                <label class="sr-only" for="filter-tahun-lulus">Pilih tahun lulusan</label>
+                <select id="filter-tahun-lulus" name="tahun_lulus" aria-label="Tahun Lulusan" onchange="this.form.submit()"
+                    class="w-full sm:w-56 min-h-11 rounded-lg bg-white border border-slate-300 text-slate-900 text-sm font-semibold px-4 py-2.5 focus:border-brand focus:ring-2 focus:ring-brand-200">
+                    <option value="">Semua Tahun Lulusan</option>
+                    @foreach($tahunLulusOptions as $year)
+                        <option value="{{ $year }}" @selected((string) $tahunLulus === (string) $year)>Lulusan {{ $year }}</option>
+                    @endforeach
+                </select>
+            </form>
         </div>
 
         <p class="text-xs text-slate-400 mt-3.5 flex items-center gap-2">
             <i class="fa-regular fa-circle-question text-slate-400" aria-hidden="true"></i>
-            Filter dapat menjadi aktif setelah data alumni terlink dengan sistem.
+            Filter dapat menjadi aktif setelah data alumni terhubung dengan sistem.
         </p>
     </section>
 
@@ -133,7 +136,7 @@
                 </span>
                 <div class="min-w-0 flex-1">
                     <h2 class="font-display text-lg font-bold text-slate-900">Status Pekerjaan Alumni</h2>
-                    <p class="text-sm text-slate-500">Kesebaran jawaban tracer study berdasarkan status utama</p>
+                    <p class="text-sm text-slate-500">Sebaran jawaban tracer study berdasarkan status utama</p>
                 </div>
                 <span class="inline-flex items-center rounded-full bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 whitespace-nowrap tabular-nums">{{ $totalResponses }} Jawaban</span>
             </div>
@@ -164,7 +167,7 @@
                     <i class="fa-solid fa-chart-column text-2xl text-slate-300 mb-3" aria-hidden="true"></i>
                     <h3 class="text-base font-bold text-slate-700 mb-1">Grafik belum tersedia</h3>
                     <p class="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                        Kesebaran status utama akan terkuplung setelah alumni mengisi kuesioner tracer study pada periode kuesioner aktif.
+                        Sebaran status utama akan terkumpul setelah alumni mengisi kuesioner tracer study pada periode kuesioner aktif.
                     </p>
                 </div>
             @endif
@@ -177,7 +180,7 @@
                     <i class="fa-solid fa-chart-pie transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"></i>
                 </span>
                 <div class="min-w-0 flex-1">
-                    <h2 class="font-display text-lg font-bold text-slate-900">Distribusiya Karir Alumni</h2>
+                    <h2 class="font-display text-lg font-bold text-slate-900">Distribusi Karir Alumni</h2>
                     <p class="text-sm text-slate-500">Proporsi alumni per kategori karir (Bekerja, Kuliah, Wirausaha)</p>
                 </div>
             </div>
@@ -185,10 +188,10 @@
             @if($placedTotal > 0)
                 <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
                     <div class="flex items-center justify-between mb-2.5 text-xs font-semibold text-slate-600">
-                        <span>Distribusiya alumni per kategori</span>
+                        <span>Distribusi alumni per kategori</span>
                         <span class="tabular-nums">{{ number_format($placedTotal) }} alumni</span>
                     </div>
-                    <div class="flex h-4 rounded-full bg-slate-200 overflow-hidden" role="img" aria-label="Distribusiya alumni per kategori karir">
+                    <div class="flex h-4 rounded-full bg-slate-200 overflow-hidden" role="img" aria-label="Distribusi alumni per kategori karir">
                         <span class="bg-brand-600 statistics-bar" style="--bar-width: {{ $bekerjaShare }}%" title="Bekerja {{ $bekerjaShare }}%"></span>
                         <span class="bg-cta-600 statistics-bar statistics-bar-delay-1" style="--bar-width: {{ $kuliahShare }}%" title="Melanjutkan Kuliah {{ $kuliahShare }}%"></span>
                         <span class="bg-brand-400 statistics-bar statistics-bar-delay-2" style="--bar-width: {{ $wirausahaShare }}%" title="Wirausaha {{ $wirausahaShare }}%"></span>
@@ -202,9 +205,9 @@
             @else
                 <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-6 py-8 text-center">
                     <i class="fa-solid fa-chart-pie text-2xl text-slate-300 mb-3" aria-hidden="true"></i>
-                    <h3 class="text-base font-bold text-slate-700 mb-1">Distribusiya belum tersedia</h3>
+                    <h3 class="text-base font-bold text-slate-700 mb-1">Distribusi belum tersedia</h3>
                     <p class="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                        Proporsi alumni per kategori karir akan terkuplung ketika jawaban kuesioner tersimpan pada sistem.
+                        Proporsi alumni per kategori karir akan terkumpul ketika jawaban kuesioner tersimpan pada sistem.
                     </p>
                 </div>
             @endif
@@ -258,7 +261,7 @@
                     </div>
                 @else
                     <p class="text-xs text-slate-500 leading-relaxed">
-                        Data akan terkuplung ketika alumni bekerja mengisi indikator kesesuaian dengan jurusan pada kuesioner.
+                        Data akan terkumpul ketika alumni bekerja mengisi indikator kesesuaian dengan jurusan pada kuesioner.
                     </p>
                 @endif
             </div>
@@ -279,7 +282,7 @@
                     </div>
                 @else
                     <p class="text-xs text-slate-500 leading-relaxed">
-                        Distribusiya kisaran gaji alumni bekerja akan terkuplung ketika data kuesioner terlink dengan sistem.
+                        Distribusi kisaran gaji alumni bekerja akan terkumpul ketika data kuesioner terhubung dengan sistem.
                     </p>
                 @endif
             </div>
@@ -321,7 +324,7 @@
                         @foreach($statistikRows as $row)
                             <tr class="transition-colors duration-200 hover:bg-brand-50">
                                 <td class="px-4 py-3 text-slate-500 tabular-nums">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-3 font-semibold text-slate-900 tabular-nums whitespace-nowrap">Lulusan {{ $row['tahun'] ?? '' }}</td>
+                                <td class="px-4 py-3 font-semibold text-slate-900 tabular-nums whitespace-nowrap">Lulusan {{ $row['tahun_lulus'] ?? '' }}</td>
                                 <td class="px-4 py-3 text-right tabular-nums font-semibold text-slate-900">{{ number_format($row['total_alumni'] ?? 0) }}</td>
                                 <td class="px-4 py-3 text-right tabular-nums text-slate-600">{{ number_format($row['bekerja'] ?? 0) }}</td>
                                 <td class="px-4 py-3 text-right tabular-nums text-slate-600">{{ number_format($row['kuliah'] ?? 0) }}</td>
@@ -335,7 +338,7 @@
                                 <i class="fa-solid fa-table text-2xl text-slate-300 mb-3" aria-hidden="true"></i>
                                 <p class="text-sm font-bold text-slate-700 mb-1">Data statistik alumni belum tersedia</p>
                                 <p class="text-xs text-slate-400 max-w-md mx-auto leading-relaxed">
-                                    Tabela per tahun lulusan akan terkuplung ketika data alumni dan jawaban kuesioner tracer study terlink dengan sistem.
+                                    Tabel per tahun lulusan akan terkumpul ketika data alumni dan jawaban kuesioner tracer study terhubung dengan sistem.
                                 </p>
                             </td>
                         </tr>
