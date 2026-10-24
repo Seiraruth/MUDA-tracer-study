@@ -86,54 +86,54 @@ const closeResponseModal = () => {
     <AdminLayout title="Ringkasan">
         <div class="space-y-7 max-w-7xl mx-auto">
             <!-- Header identifies the school's tracer-study work; the yellow accent marks the primary action. -->
-            <div class="relative overflow-hidden rounded-2xl bg-primary-900 p-6 sm:p-8 text-white border border-primary-800">
-                <div class="absolute right-0 top-0 h-full w-1.5 bg-cta" aria-hidden="true"></div>
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 p-7 sm:p-9 text-white border border-primary-700/50 shadow-xl">
+                <div class="absolute right-0 top-0 h-full w-2 bg-gradient-to-b from-cta via-cta-600 to-cta-700" aria-hidden="true"></div>
                 <div class="relative z-10 flex flex-col lg:flex-row lg:items-start justify-between gap-6">
-                    <div class="space-y-3 max-w-2xl">
-                        <p class="text-sm font-semibold text-primary-200">SMK Muhammadiyah 2 Cikampek · BKK</p>
-                        <h2 class="text-2xl sm:text-3xl font-bold text-white">
-                            Pantau perjalanan lulusan
+                    <div class="space-y-3.5 max-w-2xl">
+                        <p class="text-sm font-bold text-primary-200 tracking-wide">SMK MUHAMMADIYAH 2 CIKAMPEK · BKK</p>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                            Dashboard Tracer Study
                         </h2>
-                        <p class="text-sm text-primary-100 leading-relaxed">
-                            Lihat partisipasi tracer, hasil BMW, dan alumni yang perlu ditindaklanjuti.
+                        <p class="text-base text-primary-100 leading-relaxed">
+                            Pantau partisipasi responden, capaian BMW, dan tindak lanjut alumni.
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <div class="flex flex-wrap items-center gap-3 shrink-0">
                         <Link
                             href="/admin/alumni"
-                            class="inline-flex min-h-11 items-center gap-2 px-4 py-2 rounded-lg bg-cta text-surface-900 hover:bg-cta-600 hover:text-white text-sm font-bold transition-colors"
+                            class="inline-flex min-h-12 items-center gap-2.5 px-5 py-3 rounded-xl bg-cta text-primary-950 hover:bg-cta-600 hover:shadow-lg text-sm font-bold transition-all press-effect"
                         >
-                            <Plus class="w-4 h-4" />
-                            <span>Kelola Data Alumni</span>
+                            <Plus class="w-5 h-5" />
+                            <span>Kelola Alumni</span>
                         </Link>
                         <Link
                             href="/admin/job-postings"
-                            class="inline-flex min-h-11 items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/25 text-sm font-semibold transition-colors"
+                            class="inline-flex min-h-12 items-center gap-2.5 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 text-sm font-bold transition-all press-effect"
                         >
-                            <Briefcase class="w-4 h-4" />
-                            <span>Kelola Lowongan</span>
+                            <Briefcase class="w-5 h-5" />
+                            <span>Lowongan BKK</span>
                         </Link>
                     </div>
                 </div>
 
                 <!-- Stats Row -->
-                <div class="mt-7 pt-5 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-x-5 gap-y-4">
+                <div class="mt-8 pt-6 border-t border-white/20 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5">
                     <div>
-                        <span class="text-primary-200 block text-xs">Tingkat respons</span>
-                        <span class="text-2xl font-bold text-white tabular-nums">{{ stats.responseRate }}%</span>
+                        <span class="text-primary-300 block text-xs font-semibold uppercase tracking-wide mb-1.5">Tingkat Respons</span>
+                        <span class="text-3xl font-extrabold text-white tabular-nums">{{ stats.responseRate }}%</span>
                     </div>
                     <div>
-                        <span class="text-primary-200 block text-xs">Jawaban tersimpan</span>
-                        <span class="text-2xl font-bold text-white tabular-nums">{{ stats.totalResponses }}</span>
+                        <span class="text-primary-300 block text-xs font-semibold uppercase tracking-wide mb-1.5">Total Responden</span>
+                        <span class="text-3xl font-extrabold text-white tabular-nums">{{ stats.totalResponses }}</span>
                     </div>
                     <div>
-                        <span class="text-primary-200 block text-xs">Belum mengisi tahun ini</span>
-                        <span class="text-2xl font-bold text-cta tabular-nums">{{ belumIsi.length }}</span>
+                        <span class="text-primary-300 block text-xs font-semibold uppercase tracking-wide mb-1.5">Belum Mengisi</span>
+                        <span class="text-3xl font-extrabold text-cta tabular-nums">{{ belumIsi.length }}</span>
                     </div>
                     <div>
-                        <span class="text-primary-200 block text-xs">Tahun tracer aktif</span>
-                        <span class="text-2xl font-bold text-white tabular-nums">{{ new Date().getFullYear() }}</span>
+                        <span class="text-primary-300 block text-xs font-semibold uppercase tracking-wide mb-1.5">Periode Aktif</span>
+                        <span class="text-3xl font-extrabold text-white tabular-nums">{{ new Date().getFullYear() }}</span>
                     </div>
                 </div>
             </div>
@@ -193,37 +193,37 @@ const closeResponseModal = () => {
             </div>
 
             <!-- Jurusan Section -->
-            <div v-if="byJurusan && byJurusan.length > 0" class="bg-white rounded-xl p-5 border border-surface-200 animate-in animate-in-delay-3">
-                <div class="flex items-center justify-between pb-3 mb-4 border-b border-surface-100">
+            <div v-if="byJurusan && byJurusan.length > 0" class="bg-white rounded-2xl p-6 border border-surface-200 shadow-md animate-in animate-in-delay-3">
+                <div class="flex items-center justify-between pb-4 mb-5 border-b border-surface-200">
                     <div>
-                        <h3 class="font-semibold text-surface-900 text-sm">
-                            Partisipasi per Program Keahlian
+                        <h3 class="font-extrabold text-surface-900 text-base">
+                            Partisipasi per Jurusan
                         </h3>
-                        <p class="text-xs text-surface-500">Tingkat respons tracer study</p>
+                        <p class="text-xs text-surface-600 font-medium mt-0.5">Tingkat respons berdasarkan program keahlian</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div
                         v-for="j in byJurusan"
                         :key="j.jurusan"
-                        class="p-3 rounded-lg border border-surface-100 bg-surface-50 hover-lift"
+                        class="p-4 rounded-xl border border-surface-200 bg-gradient-to-br from-surface-50 to-white hover-lift group"
                     >
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-medium text-surface-800 truncate">{{ j.jurusan }}</span>
-                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-primary-100 text-primary-700">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold text-surface-900 truncate">{{ j.jurusan }}</span>
+                            <span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-primary-100 text-primary-700">
                                 {{ j.rate }}%
                             </span>
                         </div>
-                        <div class="h-1.5 w-full bg-surface-200 rounded-full overflow-hidden">
+                        <div class="h-2 w-full bg-surface-200 rounded-full overflow-hidden mb-3">
                             <div
-                                class="h-full bg-primary-500 rounded-full"
+                                class="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-700 ease-out"
                                 :style="{ width: `${j.rate}%` }"
                             ></div>
                         </div>
-                        <div class="flex items-center justify-between text-[10px] text-surface-500 mt-2">
-                            <span>Respon: <strong class="text-surface-700">{{ j.responses }}</strong></span>
-                            <span>Total: <strong class="text-surface-700">{{ j.total }}</strong></span>
+                        <div class="flex items-center justify-between text-xs text-surface-600 font-medium">
+                            <span>Responden: <strong class="text-surface-900">{{ j.responses }}</strong></span>
+                            <span>Total: <strong class="text-surface-900">{{ j.total }}</strong></span>
                         </div>
                     </div>
                 </div>
@@ -245,19 +245,19 @@ const closeResponseModal = () => {
             </div>
 
             <!-- Follow-up list is prominent because it directly supports the admin's next action. -->
-            <section class="bg-white rounded-2xl border border-surface-200 overflow-hidden" aria-labelledby="pending-tracer-heading">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 border-b border-surface-200">
-                    <div class="flex items-start gap-3">
-                        <span class="w-10 h-10 rounded-lg bg-cta/25 text-primary-900 flex items-center justify-center shrink-0" aria-hidden="true">
-                            <ClipboardCheck class="w-5 h-5" />
+            <section class="bg-white rounded-2xl border border-surface-200 overflow-hidden shadow-md" aria-labelledby="pending-tracer-heading">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 py-5 bg-gradient-to-r from-cta/10 to-white border-b border-surface-200">
+                    <div class="flex items-start gap-3.5">
+                        <span class="w-12 h-12 rounded-xl bg-gradient-to-br from-cta to-cta-600 text-primary-950 flex items-center justify-center shrink-0 shadow-lg" aria-hidden="true">
+                            <ClipboardCheck class="w-6 h-6" />
                         </span>
                         <div>
-                            <h3 id="pending-tracer-heading" class="font-bold text-surface-900 text-base">Tindak lanjut tracer tahun ini</h3>
-                            <p class="text-sm text-surface-600">Alumni tanpa jawaban untuk periode {{ new Date().getFullYear() }}.</p>
+                            <h3 id="pending-tracer-heading" class="font-extrabold text-surface-900 text-lg">Tindak Lanjut Periode Ini</h3>
+                            <p class="text-sm text-surface-600 font-medium mt-1">Alumni belum mengisi kuesioner tahun {{ new Date().getFullYear() }}</p>
                         </div>
                     </div>
-                    <span v-if="belumIsi.length" class="self-start sm:self-auto px-3 py-1.5 rounded-md bg-cta/30 text-surface-900 text-sm font-bold tabular-nums">
-                        {{ belumIsi.length }} perlu dihubungi
+                    <span v-if="belumIsi.length" class="self-start sm:self-auto px-4 py-2 rounded-xl bg-cta text-primary-950 text-sm font-extrabold tabular-nums shadow-md">
+                        {{ belumIsi.length }} alumni
                     </span>
                 </div>
 
@@ -265,24 +265,24 @@ const closeResponseModal = () => {
                     <div
                         v-for="alumni in belumIsi"
                         :key="alumni.id"
-                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 hover:bg-surface-50 transition-colors"
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 hover:bg-surface-50 transition-all group"
                     >
-                        <div class="flex items-center gap-3 min-w-0">
-                            <div class="w-9 h-9 rounded-lg bg-primary-100 text-primary-900 flex items-center justify-center font-bold text-sm shrink-0" aria-hidden="true">
+                        <div class="flex items-center gap-3.5 min-w-0">
+                            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-100 to-primary-200 text-primary-900 flex items-center justify-center font-extrabold text-base shrink-0 group-hover:scale-105 transition-transform" aria-hidden="true">
                                 {{ alumni.nama.charAt(0) }}
                             </div>
                             <div class="min-w-0">
-                                <p class="text-sm font-semibold text-surface-900 truncate">{{ alumni.nama }}</p>
-                                <p class="text-xs text-surface-600 truncate">{{ alumni.jurusan }} · Lulusan {{ alumni.tahun_lulus }}</p>
+                                <p class="text-sm font-bold text-surface-900 truncate">{{ alumni.nama }}</p>
+                                <p class="text-xs text-surface-600 font-medium truncate mt-0.5">{{ alumni.jurusan }} · Angkatan {{ alumni.tahun_lulus }}</p>
                             </div>
                         </div>
-                        <span class="inline-flex min-h-11 items-center text-xs font-semibold text-surface-700">
-                            Belum mengisi
+                        <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 text-xs font-bold">
+                            Belum Isi
                         </span>
                     </div>
                 </div>
-                <p v-else class="px-5 py-8 text-sm text-surface-700" role="status">
-                    Tidak ada alumni yang perlu ditindaklanjuti untuk tahun ini.
+                <p v-else class="px-6 py-10 text-center text-sm text-surface-700 font-medium" role="status">
+                    Semua alumni sudah mengisi kuesioner untuk periode ini.
                 </p>
             </section>
         </div>

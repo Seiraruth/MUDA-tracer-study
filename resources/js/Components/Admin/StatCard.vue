@@ -49,19 +49,19 @@ const colorClasses = computed(() => {
 </script>
 
 <template>
-    <div class="bg-white rounded-xl p-4 border border-surface-200 shadow-premium shadow-premium-hover hover-lift stat-glow">
-        <div class="flex items-start justify-between">
-            <div class="space-y-0.5">
-                <span class="text-[11px] font-medium text-surface-500 uppercase tracking-wide">
+    <div class="bg-white rounded-2xl p-5 border border-surface-200 shadow-premium shadow-premium-hover hover-lift stat-glow group">
+        <div class="flex items-start justify-between mb-4">
+            <div class="space-y-1">
+                <span class="text-xs font-bold text-surface-600 uppercase tracking-wider block">
                     {{ title }}
                 </span>
-                <div class="flex items-baseline gap-1.5">
-                    <span class="text-2xl font-bold text-surface-900">
+                <div class="flex items-baseline gap-2">
+                    <span class="text-3xl font-extrabold text-surface-900 tabular-nums">
                         {{ value }}
                     </span>
                     <span
                         v-if="percentage !== null"
-                        class="text-[10px] font-semibold px-1.5 py-0.5 rounded"
+                        class="text-xs font-extrabold px-2 py-1 rounded-lg"
                         :class="colorClasses.badge"
                     >
                         {{ percentage }}%
@@ -70,16 +70,16 @@ const colorClasses = computed(() => {
             </div>
             <div
                 v-if="icon"
-                class="w-10 h-10 rounded-lg flex items-center justify-center"
+                class="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform"
                 :class="colorClasses.bg"
             >
-                <component :is="icon" class="w-5 h-5 icon-pulse" />
+                <component :is="icon" class="w-6 h-6" />
             </div>
         </div>
 
-        <div class="mt-3 pt-2.5 border-t border-surface-100 flex items-center justify-between text-[11px]">
-            <span class="text-surface-500">{{ subtitle }}</span>
-            <span v-if="badge" class="font-semibold" :class="colorClasses.indicator">
+        <div class="flex items-center justify-between text-xs">
+            <span class="text-surface-600 font-medium">{{ subtitle }}</span>
+            <span v-if="badge" class="font-bold" :class="colorClasses.indicator">
                 {{ badge }}
             </span>
         </div>

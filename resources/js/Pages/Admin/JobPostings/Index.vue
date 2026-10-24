@@ -113,38 +113,38 @@ const resetFilters = () => {
 <template>
     <Head title="Kelola Lowongan Kerja BKK - Admin" />
 
-    <AdminLayout title="Bursa Kerja Khusus (BKK)">
+    <AdminLayout title="Lowongan Kerja BKK">
         <div class="space-y-6 max-w-7xl mx-auto">
             <!-- Header bar -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-surface-200 animate-in">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-7 rounded-2xl border border-surface-200 shadow-md animate-in">
                 <div>
-                    <h2 class="text-xl font-bold text-surface-900 tracking-tight flex items-center gap-2">
-                        <Briefcase class="w-5 h-5 text-primary-600 icon-pulse" />
-                        <span>Informasi Lowongan Kerja</span>
+                    <h2 class="text-2xl font-extrabold text-surface-900 tracking-tight flex items-center gap-3">
+                        <Briefcase class="w-6 h-6 text-primary-600" />
+                        <span>Lowongan Kerja BKK</span>
                     </h2>
-                    <p class="text-xs text-surface-600 mt-1">
-                        Dikelola oleh unit Bursa Kerja Khusus (BKK) SMK untuk alumni & calon lulusan.
+                    <p class="text-sm text-surface-600 mt-2 font-medium">
+                        Bursa Kerja Khusus untuk alumni dan calon lulusan
                     </p>
                 </div>
                 <button
                     @click="openCreateModal"
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold transition-all shadow-md hover-lift"
+                    class="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold transition-all shadow-lg hover-lift"
                 >
-                    <Plus class="w-4 h-4" />
-                    <span>Posting Lowongan Baru</span>
+                    <Plus class="w-5 h-5" />
+                    <span>Tambah Lowongan</span>
                 </button>
             </div>
 
             <!-- Filters Bar -->
-            <div class="bg-white p-4 rounded-2xl border border-surface-200 grid grid-cols-1 sm:grid-cols-12 gap-3 animate-in animate-in-delay-1">
+            <div class="bg-white p-5 rounded-2xl border border-surface-200 shadow-sm grid grid-cols-1 sm:grid-cols-12 gap-3 animate-in animate-in-delay-1">
                 <div class="sm:col-span-7 relative">
-                    <Search class="w-4 h-4 text-surface-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <Search class="w-4 h-4 text-surface-400 absolute left-4 top-1/2 -translate-y-1/2" />
                     <input
                         v-model="search"
                         @keyup.enter="applyFilters"
                         type="text"
-                        placeholder="Cari judul lowongan, perusahaan, posisi..."
-                        class="w-full pl-10 pr-4 py-2 text-xs rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors text-surface-900"
+                        placeholder="Cari judul, perusahaan, atau posisi"
+                        class="w-full pl-11 pr-4 py-2.5 text-sm rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all text-surface-900 font-medium placeholder:text-surface-400 placeholder:font-normal"
                     />
                 </div>
 
@@ -152,24 +152,24 @@ const resetFilters = () => {
                     <select
                         v-model="selectedActive"
                         @change="applyFilters"
-                        class="w-full px-3 py-2 text-xs rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 text-surface-800"
+                        class="w-full px-4 py-2.5 text-sm rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-800 font-medium transition-all"
                     >
                         <option value="">Semua Status</option>
-                        <option value="1">Aktif Saja</option>
-                        <option value="0">Tutup / Nonaktif</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Nonaktif</option>
                     </select>
                 </div>
 
                 <div class="sm:col-span-2 flex items-center gap-2">
                     <button
                         @click="applyFilters"
-                        class="flex-1 py-2 px-3 text-xs font-semibold bg-primary-600 hover:bg-primary-700 text-white rounded-xl transition-colors text-center"
+                        class="flex-1 py-2.5 px-4 text-sm font-bold bg-primary-600 hover:bg-primary-700 text-white rounded-xl transition-all shadow-sm hover:shadow-md"
                     >
-                        Filter
+                        Terapkan
                     </button>
                     <button
                         @click="resetFilters"
-                        class="py-2 px-3 text-xs font-semibold bg-surface-100 hover:bg-surface-200 text-surface-700 rounded-xl transition-colors"
+                        class="py-2.5 px-4 text-sm font-bold bg-surface-100 hover:bg-surface-200 text-surface-700 rounded-xl transition-all"
                     >
                         Reset
                     </button>
@@ -177,50 +177,50 @@ const resetFilters = () => {
             </div>
 
             <!-- Table Card -->
-            <div class="bg-white rounded-2xl border border-surface-200 overflow-hidden animate-in animate-in-delay-2">
+            <div class="bg-white rounded-2xl border border-surface-200 overflow-hidden shadow-md animate-in animate-in-delay-2">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-surface-50 border-b border-surface-200 text-surface-600 uppercase tracking-wider font-semibold">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gradient-to-r from-surface-50 to-white border-b border-surface-200 text-surface-700 uppercase tracking-wider font-extrabold">
                             <tr>
-                                <th class="px-6 py-3.5">Judul & Perusahaan</th>
-                                <th class="px-6 py-3.5">Posisi & Lokasi</th>
-                                <th class="px-6 py-3.5">Batas Pendaftaran</th>
-                                <th class="px-6 py-3.5">Status</th>
-                                <th class="px-6 py-3.5 text-right">Aksi</th>
+                                <th class="px-6 py-4 text-xs">Judul & Perusahaan</th>
+                                <th class="px-6 py-4 text-xs">Posisi & Lokasi</th>
+                                <th class="px-6 py-4 text-xs">Batas Pendaftaran</th>
+                                <th class="px-6 py-4 text-xs">Status</th>
+                                <th class="px-6 py-4 text-right text-xs">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-surface-100">
                             <tr
                                 v-for="job in jobs.data"
                                 :key="job.id"
-                                class="hover:bg-surface-50 transition-colors"
+                                class="hover:bg-surface-50/80 transition-all group"
                             >
                                 <td class="px-6 py-4">
-                                    <div class="font-bold text-surface-900">{{ job.judul }}</div>
-                                    <div class="text-[11px] text-primary-600 font-semibold">{{ job.perusahaan }}</div>
+                                    <div class="font-extrabold text-surface-900">{{ job.judul }}</div>
+                                    <div class="text-xs text-primary-600 font-bold mt-0.5">{{ job.perusahaan }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="font-medium text-surface-800">{{ job.posisi }}</span>
-                                    <div class="text-[11px] text-surface-500">{{ job.lokasi || 'Tidak ditentukan' }}</div>
+                                    <div class="font-bold text-surface-800">{{ job.posisi }}</div>
+                                    <div class="text-xs text-surface-600 font-medium mt-0.5">{{ job.lokasi || 'Lokasi tidak ditentukan' }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span v-if="job.deadline" class="font-medium text-surface-700">
+                                    <span v-if="job.deadline" class="inline-flex items-center px-2.5 py-1 rounded-lg bg-surface-100 text-surface-800 text-xs font-bold">
                                         {{ new Date(job.deadline).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) }}
                                     </span>
-                                    <span v-else class="text-surface-400">Tidak ada batas</span>
+                                    <span v-else class="text-surface-500 text-xs font-medium">Tidak ada batas</span>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span
                                         v-if="job.is_active"
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800"
+                                        class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-sm"
                                     >
                                         Aktif
                                     </span>
                                     <span
                                         v-else
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-surface-100 text-surface-600"
+                                        class="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-100 text-surface-600"
                                     >
-                                        Ditutup
+                                        Nonaktif
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
@@ -229,22 +229,22 @@ const resetFilters = () => {
                                             v-if="job.link_pendaftaran"
                                             :href="job.link_pendaftaran"
                                             target="_blank"
-                                            class="p-1.5 text-surface-400 hover:text-primary-600 rounded-lg transition-colors icon-pulse"
-                                            title="Buka Link Pendaftaran"
+                                            class="p-2 text-surface-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all group-hover:scale-105"
+                                            title="Buka Link"
                                         >
                                             <ExternalLink class="w-4 h-4" />
                                         </a>
                                         <button
                                             @click="openEditModal(job)"
-                                            class="p-1.5 text-surface-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors icon-pulse"
-                                            title="Edit Lowongan"
+                                            class="p-2 text-surface-500 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all group-hover:scale-105"
+                                            title="Edit"
                                         >
                                             <Edit2 class="w-4 h-4" />
                                         </button>
                                         <button
                                             @click="deleteJob(job)"
-                                            class="p-1.5 text-surface-500 hover:text-error hover:bg-rose-50 rounded-lg transition-colors icon-pulse"
-                                            title="Hapus Lowongan"
+                                            class="p-2 text-surface-500 hover:text-error hover:bg-rose-50 rounded-xl transition-all group-hover:scale-105"
+                                            title="Hapus"
                                         >
                                             <Trash2 class="w-4 h-4" />
                                         </button>
@@ -252,8 +252,8 @@ const resetFilters = () => {
                                 </td>
                             </tr>
                             <tr v-if="jobs.data.length === 0">
-                                <td colspan="5" class="px-6 py-12 text-center text-surface-400">
-                                    Tidak ada lowongan kerja yang ditemukan.
+                                <td colspan="5" class="px-6 py-16 text-center text-surface-500 font-medium">
+                                    Tidak ada lowongan yang sesuai dengan filter pencarian
                                 </td>
                             </tr>
                         </tbody>
@@ -261,9 +261,9 @@ const resetFilters = () => {
                 </div>
 
                 <!-- Pagination footer -->
-                <div v-if="jobs.links && jobs.links.length > 3" class="px-6 py-4 border-t border-surface-100 flex items-center justify-between">
-                    <span class="text-xs text-surface-500">
-                        Menampilkan {{ jobs.from || 0 }} - {{ jobs.to || 0 }} dari {{ jobs.total }} lowongan
+                <div v-if="jobs.links && jobs.links.length > 3" class="px-6 py-4 border-t border-surface-200 flex items-center justify-between bg-surface-50/50">
+                    <span class="text-sm text-surface-600 font-medium">
+                        Menampilkan <strong class="text-surface-900">{{ jobs.from || 0 }} - {{ jobs.to || 0 }}</strong> dari <strong class="text-surface-900">{{ jobs.total }}</strong> data
                     </span>
                     <div class="flex items-center gap-1">
                         <component
@@ -273,9 +273,9 @@ const resetFilters = () => {
                             :href="link.url"
                             v-html="link.label"
                             :class="[
-                                'px-3 py-1.5 text-xs rounded-lg transition-colors',
+                                'px-3.5 py-2 text-sm rounded-lg transition-all font-bold',
                                 link.active
-                                    ? 'bg-primary-600 text-white font-bold'
+                                    ? 'bg-primary-600 text-white shadow-md'
                                     : link.url
                                     ? 'text-surface-700 hover:bg-surface-100'
                                     : 'text-surface-300 pointer-events-none'
@@ -289,134 +289,134 @@ const resetFilters = () => {
         <!-- Add / Edit Modal -->
         <div
             v-if="isModalOpen"
-            class="fixed inset-0 z-50 overflow-y-auto bg-surface-900/70 backdrop-blur-sm flex items-center justify-center p-4"
+            class="fixed inset-0 z-50 overflow-y-auto bg-surface-900/80 backdrop-blur-sm flex items-center justify-center p-4"
             @click.self="closeModal"
         >
-            <div class="bg-white rounded-2xl max-w-xl w-full shadow-2xl border border-surface-200 overflow-hidden">
-                <div class="px-6 py-5 border-b border-surface-100 flex items-center justify-between bg-surface-50">
-                    <h3 class="font-bold text-base text-surface-900">
-                        {{ editingJob ? 'Edit Informasi Lowongan' : 'Posting Lowongan Kerja Baru' }}
+            <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl border border-surface-200 overflow-hidden animate-in">
+                <div class="px-7 py-6 border-b border-surface-200 flex items-center justify-between bg-gradient-to-r from-primary-50 to-white">
+                    <h3 class="font-extrabold text-lg text-surface-900">
+                        {{ editingJob ? 'Edit Lowongan' : 'Tambah Lowongan Baru' }}
                     </h3>
-                    <button @click="closeModal" class="p-2 text-surface-500 hover:text-surface-700 rounded-lg transition-colors icon-pulse">
+                    <button @click="closeModal" class="p-2 text-surface-500 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-all">
                         <X class="w-5 h-5" />
                     </button>
                 </div>
 
-                <form @submit.prevent="submitForm" class="p-6 space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Judul Lowongan *</label>
+                <form @submit.prevent="submitForm" class="p-7 space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
+                        <div class="space-y-2">
+                            <label class="font-bold text-surface-700">Judul Lowongan *</label>
                             <input
                                 v-model="form.judul"
                                 type="text"
                                 required
                                 placeholder="Contoh: Rekrutmen Teknisi Jaringan"
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
-                            <p v-if="form.errors.judul" class="text-error text-[11px]">{{ form.errors.judul }}</p>
+                            <p v-if="form.errors.judul" class="text-error text-xs font-medium">{{ form.errors.judul }}</p>
                         </div>
 
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Nama Perusahaan / Mitra *</label>
+                        <div class="space-y-2">
+                            <label class="font-bold text-surface-700">Nama Perusahaan *</label>
                             <input
                                 v-model="form.perusahaan"
                                 type="text"
                                 required
                                 placeholder="Contoh: PT Telkom Indonesia"
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
-                            <p v-if="form.errors.perusahaan" class="text-error text-[11px]">{{ form.errors.perusahaan }}</p>
+                            <p v-if="form.errors.perusahaan" class="text-error text-xs font-medium">{{ form.errors.perusahaan }}</p>
                         </div>
 
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Posisi / Jabatan *</label>
+                        <div class="space-y-2">
+                            <label class="font-bold text-surface-700">Posisi / Jabatan *</label>
                             <input
                                 v-model="form.posisi"
                                 type="text"
                                 required
                                 placeholder="Contoh: Junior Network Engineer"
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
-                            <p v-if="form.errors.posisi" class="text-error text-[11px]">{{ form.errors.posisi }}</p>
+                            <p v-if="form.errors.posisi" class="text-error text-xs font-medium">{{ form.errors.posisi }}</p>
                         </div>
 
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Lokasi Kerja</label>
+                        <div class="space-y-2">
+                            <label class="font-bold text-surface-700">Lokasi Kerja</label>
                             <input
                                 v-model="form.lokasi"
                                 type="text"
-                                placeholder="Contoh: Jakarta / WFH"
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                placeholder="Contoh: Jakarta / Remote"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
                         </div>
 
-                        <div class="sm:col-span-2 space-y-1">
-                            <label class="font-semibold text-surface-700">Persyaratan & Kualifikasi *</label>
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="font-bold text-surface-700">Persyaratan & Kualifikasi *</label>
                             <textarea
                                 v-model="form.persyaratan"
-                                rows="3"
+                                rows="4"
                                 required
-                                placeholder="Tuliskan kualifikasi, syarat pendidikan SMK, dan keahlian yang dibutuhkan..."
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                placeholder="Tuliskan kualifikasi, syarat pendidikan, dan keahlian yang dibutuhkan"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             ></textarea>
-                            <p v-if="form.errors.persyaratan" class="text-error text-[11px]">{{ form.errors.persyaratan }}</p>
+                            <p v-if="form.errors.persyaratan" class="text-error text-xs font-medium">{{ form.errors.persyaratan }}</p>
                         </div>
 
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Link Pendaftaran / Form Online</label>
+                        <div class="space-y-2">
+                            <label class="font-bold text-surface-700">Link Pendaftaran</label>
                             <input
                                 v-model="form.link_pendaftaran"
                                 type="url"
-                                placeholder="https://..."
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                placeholder="https://"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
                         </div>
 
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Batas Waktu (Deadline)</label>
+                        <div class="space-y-2">
+                            <label class="font-bold text-surface-700">Batas Waktu</label>
                             <input
                                 v-model="form.deadline"
                                 type="date"
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
                         </div>
 
-                        <div class="space-y-1">
-                            <label class="font-semibold text-surface-700">Kontak Person / HRD</label>
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="font-bold text-surface-700">Kontak HRD</label>
                             <input
                                 v-model="form.kontak"
                                 type="text"
-                                placeholder="WhatsApp atau Email HRD"
-                                class="w-full px-3 py-2 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 text-surface-900"
+                                placeholder="WhatsApp atau Email"
+                                class="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-200 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 text-surface-900 font-medium transition-all"
                             />
                         </div>
 
-                        <div class="space-y-1 flex items-center pt-5">
-                            <label class="flex items-center gap-2 cursor-pointer font-semibold text-surface-700">
+                        <div class="sm:col-span-2 pt-2">
+                            <label class="flex items-center gap-3 cursor-pointer font-bold text-surface-700 p-4 rounded-xl bg-surface-50 hover:bg-surface-100 transition-colors">
                                 <input
                                     v-model="form.is_active"
                                     type="checkbox"
-                                    class="rounded text-primary-600 focus:ring-primary-500"
+                                    class="w-5 h-5 rounded-lg text-primary-600 focus:ring-primary-500 focus:ring-2"
                                 />
                                 <span>Publikasikan sebagai lowongan aktif</span>
                             </label>
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-surface-100 flex items-center justify-end gap-3">
+                    <div class="pt-5 border-t border-surface-200 flex items-center justify-end gap-3">
                         <button
                             type="button"
                             @click="closeModal"
-                            class="px-4 py-2 text-xs font-semibold text-surface-700 bg-white border border-surface-300 rounded-xl hover:bg-surface-50 transition-colors"
+                            class="px-5 py-2.5 text-sm font-bold text-surface-700 bg-white border-2 border-surface-300 rounded-xl hover:bg-surface-50 transition-all"
                         >
                             Batal
                         </button>
                         <button
                             type="submit"
                             :disabled="form.processing"
-                            class="px-4 py-2 text-xs font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-all shadow-md disabled:opacity-50 hover-lift"
+                            class="px-5 py-2.5 text-sm font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {{ editingJob ? 'Simpan Perubahan' : 'Posting Lowongan' }}
+                            {{ editingJob ? 'Simpan Perubahan' : 'Tambah Lowongan' }}
                         </button>
                     </div>
                 </form>

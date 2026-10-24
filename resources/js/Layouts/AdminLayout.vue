@@ -108,14 +108,14 @@ const isCurrentRoute = (item) => {
             ]"
         >
             <!-- Logo -->
-            <div class="h-16 flex items-center justify-between px-4 border-b border-primary-800">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                        <GraduationCap class="w-4 h-4 text-primary-300" />
+            <div class="h-16 flex items-center justify-between px-4 border-b border-primary-800/80">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cta to-cta-600 flex items-center justify-center shadow-lg">
+                        <GraduationCap class="w-5 h-5 text-primary-950" />
                     </div>
                     <div class="space-y-0">
-                        <div class="text-sm font-semibold">Tracer Study</div>
-                        <div class="text-[10px] text-primary-300">BKK Admin</div>
+                        <div class="text-base font-extrabold text-white">Tracer Study</div>
+                        <div class="text-[10px] text-primary-400 font-semibold uppercase tracking-wider">Admin Panel</div>
                     </div>
                 </div>
                 <button
@@ -128,41 +128,42 @@ const isCurrentRoute = (item) => {
 
             <!-- System Status -->
             <div class="p-3">
-                <div class="bg-primary-800/50 rounded-lg p-2.5 border border-primary-700/50 flex items-center gap-2.5">
-                    <div class="relative">
-                        <div class="w-2 h-2 rounded-full bg-success"></div>
+                <div class="bg-primary-800/60 rounded-xl p-3 border border-primary-700/60 flex items-center gap-3 shadow-lg">
+                    <div class="relative flex-shrink-0">
+                        <div class="w-2.5 h-2.5 rounded-full bg-success animate-pulse"></div>
+                        <div class="absolute inset-0 w-2.5 h-2.5 rounded-full bg-success opacity-30 animate-ping"></div>
                     </div>
-                    <div class="space-y-0">
-                        <p class="text-xs font-medium text-primary-100">Tahun {{ new Date().getFullYear() }}</p>
-                        <p class="text-[10px] text-primary-400">Sistem online</p>
+                    <div class="space-y-0.5 min-w-0">
+                        <p class="text-sm font-bold text-white">Periode {{ new Date().getFullYear() }}</p>
+                        <p class="text-[10px] text-primary-400 font-medium uppercase tracking-wide">Sistem Aktif</p>
                     </div>
                 </div>
             </div>
 
             <!-- Navigation -->
             <div class="flex-1 px-3 py-2 overflow-y-auto">
-                <div class="px-2 pb-2 mb-2 border-b border-primary-800">
-                    <div class="text-[10px] font-semibold text-primary-400 uppercase tracking-wide px-1">
-                        Menu
+                <div class="px-3 pb-2.5 mb-3 border-b border-primary-800/80">
+                    <div class="text-[10px] font-extrabold text-primary-400 uppercase tracking-widest">
+                        Navigasi
                     </div>
                 </div>
-                <nav class="space-y-0.5">
+                <nav class="space-y-1">
                     <Link
                         v-for="item in navigation"
                         :key="item.name"
                         :href="item.href"
                         :class="[
-                            'group flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150',
+                            'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200',
                             isCurrentRoute(item)
-                                ? 'bg-white text-primary-900'
-                                : 'text-primary-100 hover:bg-white/10 hover:text-white'
+                                ? 'bg-white text-primary-900 shadow-lg'
+                                : 'text-primary-100 hover:bg-white/15 hover:text-white'
                         ]"
                     >
                         <component
                             :is="item.icon"
                             :class="[
-                                'w-4 h-4',
-                                isCurrentRoute(item) ? 'text-primary-600' : 'text-primary-300 group-hover:text-white'
+                                'w-5 h-5 transition-transform',
+                                isCurrentRoute(item) ? 'text-primary-600' : 'text-primary-300 group-hover:text-white group-hover:scale-110'
                             ]"
                         />
                         <span>{{ item.name }}</span>
@@ -212,19 +213,19 @@ const isCurrentRoute = (item) => {
         <!-- Main Content -->
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
             <!-- Header -->
-            <header class="h-16 bg-white border-b border-surface-200 flex items-center justify-between px-4 sm:px-6 z-30 sticky top-0">
-                <div class="flex items-center gap-3">
+            <header class="h-16 bg-white border-b border-surface-200 flex items-center justify-between px-4 sm:px-6 z-30 sticky top-0 shadow-sm">
+                <div class="flex items-center gap-4">
                     <button
                         @click="sidebarOpen = true"
-                        class="lg:hidden p-1.5 text-surface-600 hover:text-surface-900 hover:bg-surface-100 rounded-md transition-colors"
+                        class="lg:hidden p-2 text-surface-600 hover:text-surface-900 hover:bg-surface-100 rounded-xl transition-colors"
                     >
                         <Menu class="w-5 h-5" />
                     </button>
                     <div>
-                        <h1 class="text-lg font-semibold text-surface-900">
+                        <h1 class="text-xl font-extrabold text-surface-900 tracking-tight">
                             {{ title }}
                         </h1>
-                        <p class="text-xs text-surface-500 hidden sm:block">Panel pengelolaan data</p>
+                        <p class="text-xs text-surface-600 hidden sm:block font-medium">Kelola data tracer study</p>
                     </div>
                 </div>
 
